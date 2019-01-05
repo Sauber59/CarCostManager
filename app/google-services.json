@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "29844354267",
+    "firebase_url": "https://car-cos-manager.firebaseio.com",
+    "project_id": "car-cos-manager",
+    "storage_bucket": "car-cos-manager.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:29844354267:android:d24f4058be9c2c91",
+        "android_client_info": {
+          "package_name": "com.example.damo.carcostmanager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "29844354267-dhq4qnij04ictrt7s0coa37uquvv397u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDX5ksWbvejvY8pfV5kzi8cyavx3EeNy_s"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
