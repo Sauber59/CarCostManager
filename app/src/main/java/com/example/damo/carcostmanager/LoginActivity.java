@@ -1,5 +1,6 @@
 package com.example.damo.carcostmanager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -18,4 +19,20 @@ public class LoginActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
+    public void click(View view) {
+        Intent intent = null;
+        switch (view.getId()){
+
+            case R.id.loginBtn:
+                intent = new Intent(LoginActivity.this, MenuuActivity.class);
+                startActivity(intent);
+                break;
+
+            case R.id.rejestracjaBtn:
+                intent = new Intent(LoginActivity.this, MenuuActivity.class);
+                startActivity(intent);
+                break;
+        }
+
+    }
 }

@@ -28,7 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Witaj!"
-        android:textSize="18sp"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -89,16 +89,17 @@
 
     <Button
         android:id="@+id/button"
-        android:onClick="click"
         style="@android:style/Widget.Holo.Button"
         android:layout_width="268dp"
         android:layout_height="138dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="24dp"
+        android:onClick="click"
         android:shadowRadius="10"
         android:text="Rozpocznij!"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:typeface="monospace"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 

@@ -28,6 +28,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.damo.carcostmanager.MainActivity" />
         </activity>
+        <activity
+            android:name=".MenuuActivity"
+            android:label="@string/title_activity_menuu"
+            android:parentActivityName=".LoginActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.damo.carcostmanager.LoginActivity" />
+        </activity>
     </application>
 
 </manifest>
