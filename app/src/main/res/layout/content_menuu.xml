@@ -28,7 +28,7 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:id="@+id/plusButton"
+                    android:id="@+id/editCarBtn"
                     android:layout_width="38dp"
                     android:layout_height="38dp"
                     android:layout_marginRight="20dp"
@@ -112,7 +112,9 @@
             android:id="@+id/a"
             android:layout_width="wrap_content"
             android:layout_height="3dp"
-            android:background="@color/colorPrimaryDark" />
+            android:background="@color/colorPrimaryDark"
+            android:layout_marginBottom="5dp"/>
+
     <!--średnie spalanie -->
          <android.support.v7.widget.CardView
         android:layout_width="match_parent"
@@ -212,7 +214,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Ilość:"
+                        android:text="Dystans:"
                         android:textColor="@android:color/black"
                         android:textSize="12sp" />
 
@@ -235,7 +237,8 @@
                 </LinearLayout>
 
                 <ImageView
-                    android:id="@+id/plusButton1"
+                    android:id="@+id/fuelBtn"
+                    android:onClick="click"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:layout_marginRight="20dp"
@@ -248,7 +251,7 @@
             </android.support.constraint.ConstraintLayout>
 
             <LinearLayout
-                android:id="@+id/extraContainer2"
+                android:id="@+id/extraContainerFuel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
@@ -258,17 +261,17 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="extra 1"/>
+                    android:text="extra 1" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="extra 1"/>
+                    android:text="extra 1" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="extra 1"/>
+                    android:text="extra 1" />
 
 
             </LinearLayout>
@@ -372,9 +375,10 @@
                     </LinearLayout>
 
                     <ImageView
-                        android:id="@+id/plusButton1"
+                        android:id="@+id/serviceBtn"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
+                        android:onClick="click"
                         android:layout_marginRight="20dp"
                         android:src="@drawable/ic_fingerprint"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -385,7 +389,7 @@
                 </android.support.constraint.ConstraintLayout>
 
                 <LinearLayout
-                    android:id="@+id/extraContainer2"
+                    android:id="@+id/extraContainerService"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
@@ -395,17 +399,17 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="extra 1"/>
+                        android:text="extra 1" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="extra 1"/>
+                        android:text="extra 1" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="extra 1"/>
+                        android:text="extra 1" />
 
 
                 </LinearLayout>
@@ -507,9 +511,10 @@
                     </LinearLayout>
 
                     <ImageView
-                        android:id="@+id/plusButton1"
+                        android:id="@+id/reviewBtn"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
+                        android:onClick="click"
                         android:layout_marginRight="20dp"
                         android:src="@drawable/ic_fingerprint"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -520,7 +525,7 @@
                 </android.support.constraint.ConstraintLayout>
 
                 <LinearLayout
-                    android:id="@+id/extraContainer2"
+                    android:id="@+id/extraContainerReview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
@@ -530,17 +535,17 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="extra 1"/>
+                        android:text="extra 1" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="extra 1"/>
+                        android:text="extra 1" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="extra 1"/>
+                        android:text="extra 1" />
 
 
                 </LinearLayout>
@@ -643,10 +648,11 @@
                     </LinearLayout>
 
                     <ImageView
-                        android:id="@+id/plusButton1"
+                        android:id="@+id/protectionBtn"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:layout_marginRight="20dp"
+                        android:onClick="click"
                         android:src="@drawable/ic_fingerprint"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
@@ -656,7 +662,7 @@
                 </android.support.constraint.ConstraintLayout>
 
                 <LinearLayout
-                    android:id="@+id/extraContainer2"
+                    android:id="@+id/extraContainerProtection"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
@@ -666,17 +672,17 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="extra 1"/>
+                        android:text="extra 1" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="extra 1"/>
+                        android:text="extra 1" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="extra 1"/>
+                        android:text="extra 1" />
 
 
                 </LinearLayout>

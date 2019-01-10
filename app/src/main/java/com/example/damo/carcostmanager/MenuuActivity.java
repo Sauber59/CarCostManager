@@ -6,6 +6,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.LinearLayout;
 
 public class MenuuActivity extends AppCompatActivity {
 
@@ -19,6 +20,63 @@ public class MenuuActivity extends AppCompatActivity {
     }
 
     public void click(View view) {
+        LinearLayout extraContainer = null;
+
+        switch (view.getId()){
+
+            case R.id.fuelBtn:
+                extraContainer = (LinearLayout)findViewById(R.id.extraContainerFuel);
+
+                if (extraContainer.getVisibility() == View.GONE) {
+                    extraContainer.setVisibility(View.VISIBLE);
+                    return;
+                }
+
+                if (extraContainer.getVisibility() == View.VISIBLE) {
+                    extraContainer.setVisibility(View.GONE);
+                }
+            break;
+
+            case R.id.serviceBtn:
+                extraContainer = (LinearLayout)findViewById(R.id.extraContainerService);
+
+                if (extraContainer.getVisibility() == View.GONE) {
+                    extraContainer.setVisibility(View.VISIBLE);
+                    return;
+                }
+
+                if (extraContainer.getVisibility() == View.VISIBLE) {
+                    extraContainer.setVisibility(View.GONE);
+                }
+                break;
+
+            case R.id.reviewBtn:
+                extraContainer = (LinearLayout)findViewById(R.id.extraContainerReview);
+
+                if (extraContainer.getVisibility() == View.GONE) {
+                    extraContainer.setVisibility(View.VISIBLE);
+                    return;
+                }
+
+                if (extraContainer.getVisibility() == View.VISIBLE) {
+                    extraContainer.setVisibility(View.GONE);
+                }
+                break;
+
+            case R.id.protectionBtn:
+                extraContainer = (LinearLayout)findViewById(R.id.extraContainerProtection);
+
+                if (extraContainer.getVisibility() == View.GONE) {
+                    extraContainer.setVisibility(View.VISIBLE);
+                    return;
+                }
+
+                if (extraContainer.getVisibility() == View.VISIBLE) {
+                    extraContainer.setVisibility(View.GONE);
+                }
+                break;
+        }
+
 
     }
 }
