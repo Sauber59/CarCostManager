@@ -18,4 +18,7 @@ public class MenuuActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
+    public void click(View view) {
+
+    }
 }
