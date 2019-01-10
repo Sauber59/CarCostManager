@@ -128,10 +128,10 @@
                     android:layout_height="match_parent">
 
                     <TextView
-                        android:id="@+id/textView11"
+                        android:id="@+id/iloscPaliwaWyswietlTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/textView10"
+                        android:layout_below="@+id/kosztPaliwaWyswietlTV"
                         android:layout_marginStart="6dp"
                         android:layout_marginLeft="6dp"
                         android:layout_marginTop="0dp"
@@ -142,29 +142,18 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/textView12"
+                        android:id="@+id/sredniaPaliwaWyswietlTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignTop="@+id/srednieSpalanieTV"
-                        android:layout_toEndOf="@+id/srednieSpalanieTV"
-                        android:layout_toRightOf="@+id/srednieSpalanieTV"
+                        android:layout_below="@+id/spalanieWyswietlTV"
+                        android:layout_alignStart="@+id/spalanieWyswietlTV"
+                        android:layout_alignLeft="@+id/spalanieWyswietlTV"
                         android:text="6,0 l"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/textView13"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/textView12"
-                        android:layout_alignStart="@+id/textView12"
-                        android:layout_alignLeft="@+id/textView12"
-                        android:text="6,0 l"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/textView10"
+                        android:id="@+id/kosztPaliwaWyswietlTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignTop="@+id/kosztPaliwaTV"
@@ -172,6 +161,17 @@
                         android:layout_toEndOf="@+id/kosztPaliwaTV"
                         android:layout_toRightOf="@+id/kosztPaliwaTV"
                         android:text="500 zł"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/spalanieWyswietlTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@+id/srednieSpalanieTV"
+                        android:layout_toEndOf="@+id/srednieSpalanieTV"
+                        android:layout_toRightOf="@+id/srednieSpalanieTV"
+                        android:text="6,0 l"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
@@ -259,15 +259,16 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-            <TextView
-                android:id="@+id/kosztSerwisuTV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:text="Koszt:"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/dataSerwisuTV" />
+
+                <TextView
+                    android:id="@+id/kosztSerwisuTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Koszt:"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/dataSerwisuTV" />
 
                 <TextView
                     android:id="@+id/dataSerwisuTV"
@@ -280,6 +281,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/ostatniSerwisTV" />
 
                 <TextView
+                    android:id="@+id/dataSerwisuWyswietlTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/kosztSerwisuTV"
@@ -291,7 +293,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/textView5"
+                    android:id="@+id/kosztSerwisuWyswietlTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignTop="@+id/kosztSerwisuTV"
@@ -301,8 +303,9 @@
                     android:text="500 zł"
                     android:textSize="14sp"
                     android:textStyle="bold" />
-            </RelativeLayout>
-        </LinearLayout>
+                </RelativeLayout>
+             </LinearLayout>
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_weight="1"
@@ -356,7 +359,7 @@
                     android:layout_height="match_parent">
 
                     <TextView
-                        android:id="@+id/textView7"
+                        android:id="@+id/waznoscPrzegladuWyswietlTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/dataWaznosciPrzegladuTV"
@@ -369,7 +372,7 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/textView6"
+                        android:id="@+id/kosztPrzegladuWyswietlTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_above="@+id/dataWaznosciPrzegladuTV"
@@ -397,11 +400,10 @@
                         android:layout_below="@+id/kosztPrzegladuTV"
                         android:layout_alignStart="@+id/kosztPrzegladuTV"
                         android:text="Data ważności:" />
-                </RelativeLayout>
-
-
+                    </RelativeLayout>
+                </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_weight="1"
@@ -455,7 +457,7 @@
                     android:layout_height="match_parent">
 
                     <TextView
-                        android:id="@+id/textView9"
+                        android:id="@+id/waznoscUbezpieczeniaWyswietlTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/dataUbezpieczeniaTV"
@@ -467,7 +469,7 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/textView8"
+                        android:id="@+id/kosztUbezpieczeniaWyswietlTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_above="@+id/dataUbezpieczeniaTV"
@@ -497,6 +499,7 @@
                 </RelativeLayout>
             </LinearLayout>
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_weight="1"
