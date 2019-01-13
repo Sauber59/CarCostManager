@@ -5,4 +5,12 @@
     <string name="title_activity_menu">MenuActivity</string>
     <string name="title_activity_menuu">menuuActivity</string>
     <string name="title_activity_add_fuel">AddFuelActivity</string>
+    <string name="title_activity_add_fuel_activity">AddFuelActivityActivity</string>
+    <string name="title_activity_add_service">AddServiceActivity</string>
+    <string name="title_activity_add_review">AddReviewActivity</string>
+    <string name="title_activity_add_protection">AddProtectionActivity</string>
+    <string name="title_activity_history_fuel">HistoryFuelActivity</string>
+    <string name="title_activity_history_service">HistoryServiceActivity</string>
+    <string name="title_activity_history_review">HistoryReviewActivity</string>
+    <string name="title_activity_history_protection">HistoryProtectionActivity</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.example.damo.carcostmanager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -86,6 +87,64 @@ public class MenuActivity extends AppCompatActivity {
                     extraContainer.setVisibility(View.GONE);
                 }
                 break;
+        }
+    }
+
+    public void clickAdd(View view) {
+        Intent intent = null;
+
+        switch (view.getId()){
+            case (R.id.addFuelBtn):
+                intent = new Intent(MenuActivity.this, AddFuelActivity.class);
+                startActivity(intent);
+        }
+
+        switch (view.getId()){
+            case (R.id.addSeriveBtn):
+                intent = new Intent(MenuActivity.this, AddServiceActivity.class);
+                startActivity(intent);
+        }
+
+        switch (view.getId()){
+            case (R.id.addProtectionBtn):
+                intent = new Intent(MenuActivity.this, AddProtectionActivity.class);
+                startActivity(intent);
+        }
+
+        switch (view.getId()){
+            case (R.id.addReviewbtn):
+                intent = new Intent(MenuActivity.this, AddReviewActivity.class);
+                startActivity(intent);
+        }
+
+
+    }
+
+    public void clickHistory(View view) {
+        Intent intent = null;
+
+        switch (view.getId()){
+            case (R.id.hisoryFuelBtn):
+                intent = new Intent(MenuActivity.this, HistoryFuelActivity.class);
+                startActivity(intent);
+        }
+
+        switch (view.getId()){
+            case (R.id.historyServiceBtn):
+                intent = new Intent(MenuActivity.this, HistoryServiceActivity.class);
+                startActivity(intent);
+        }
+
+        switch (view.getId()){
+            case (R.id.historyProtectionBtn):
+                intent = new Intent(MenuActivity.this, HistoryProtectionActivity.class);
+                startActivity(intent);
+        }
+
+        switch (view.getId()){
+            case (R.id.hisoryReviewBtn):
+                intent = new Intent(MenuActivity.this, HistoryReviewActivity.class);
+                startActivity(intent);
         }
     }
 }

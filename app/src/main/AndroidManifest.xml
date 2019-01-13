@@ -39,7 +39,70 @@
         </activity>
         <activity
             android:name=".AddFuelActivity"
-            android:label="@string/title_activity_add_fuel"
+            android:label="@string/title_activity_add_fuel_activity"
+            android:parentActivityName=".MenuActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.damo.carcostmanager.MenuActivity" />
+        </activity>
+        <activity
+            android:name=".AddServiceActivity"
+            android:label="@string/title_activity_add_service"
+            android:parentActivityName=".MenuActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.damo.carcostmanager.MenuActivity" />
+        </activity>
+        <activity
+            android:name=".AddReviewActivity"
+            android:label="@string/title_activity_add_review"
+            android:parentActivityName=".MenuActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.damo.carcostmanager.MenuActivity" />
+        </activity>
+        <activity
+            android:name=".AddProtectionActivity"
+            android:label="@string/title_activity_add_protection"
+            android:parentActivityName=".MenuActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.damo.carcostmanager.MenuActivity" />
+        </activity>
+        <activity
+            android:name=".HistoryFuelActivity"
+            android:label="@string/title_activity_history_fuel"
+            android:parentActivityName=".MenuActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.damo.carcostmanager.MenuActivity" />
+        </activity>
+        <activity
+            android:name=".HistoryServiceActivity"
+            android:label="@string/title_activity_history_service"
+            android:parentActivityName=".MenuActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.damo.carcostmanager.MenuActivity" />
+        </activity>
+        <activity
+            android:name=".HistoryReviewActivity"
+            android:label="@string/title_activity_history_review"
+            android:parentActivityName=".MenuActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.damo.carcostmanager.MenuActivity" />
+        </activity>
+        <activity
+            android:name=".HistoryProtectionActivity"
+            android:label="@string/title_activity_history_protection"
             android:parentActivityName=".MenuActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data

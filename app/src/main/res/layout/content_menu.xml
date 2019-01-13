@@ -217,11 +217,13 @@
 
                     <Button
                         android:id="@+id/hisoryFuelBtn"
+                        android:onClick="clickHistory"
                         android:text="HISTORIA"
                         style="@style/CostExtraBtn" />
 
                 <Button
                     android:id="@+id/addFuelBtn"
+                    android:onClick="clickAdd"
                     style="@style/CostExtraBtn"
                     android:layout_marginStart="30dp"
                     android:text="DODAJ" />
@@ -314,12 +316,14 @@
                     style="@style/CostExtraContainer">
 
                         <Button
-                            android:id="@+id/hisoryServiceBtn"
+                            android:id="@+id/historyServiceBtn"
+                            android:onClick="clickHistory"
                             style="@style/CostExtraBtn"
                             android:text="HISTORIA" />
 
                         <Button
-                            android:id="@+id/button2"
+                            android:id="@+id/addSeriveBtn"
+                            android:onClick="clickAdd"
                             style="@style/CostExtraBtn"
                             android:layout_marginStart="30dp"
                             android:text="DODAJ" />
@@ -412,11 +416,13 @@
 
                         <Button
                             android:id="@+id/hisoryReviewBtn"
+                            android:onClick="clickHistory"
                             style="@style/CostExtraBtn"
                             android:text="HISTORIA" />
 
                         <Button
                             android:id="@+id/addReviewbtn"
+                            android:onClick="clickAdd"
                             style="@style/CostExtraBtn"
                             android:layout_marginStart="30dp"
                             android:text="DODAJ" />
@@ -508,12 +514,14 @@
                     style="@style/CostExtraContainer">
 
                         <Button
-                            android:id="@+id/protectionHistoryBtn"
+                            android:id="@+id/historyProtectionBtn"
+                            android:onClick="clickHistory"
                             style="@style/CostExtraBtn"
                             android:text="HISTORIA" />
 
                         <Button
                             android:id="@+id/addProtectionBtn"
+                            android:onClick="clickAdd"
                             style="@style/CostExtraBtn"
                             android:layout_marginStart="30dp"
                             android:text="DODAJ" />

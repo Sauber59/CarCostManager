@@ -2,86 +2,99 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".AddFuelActivity"
     tools:showIn="@layout/activity_add_fuel"
-    android:orientation="vertical"
-    android:gravity="center_horizontal"
-    android:padding="30dp">
+    style="@style/StartLinearLayout">
 
     <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp" />
+        style="@style/CostTypeIconImageView"
+        android:src="@drawable/paliwo"/>
 
-    <LinearLayout
-        android:layout_marginTop="50dp"
-        android:orientation="horizontal"
-        android:layout_width="wrap_content"
+    <android.support.v7.widget.CardView
+        android:layout_marginTop="70dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        app:cardCornerRadius="20dp"
+        android:padding="20dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <LinearLayout
-            android:orientation="vertical"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/addCardTextView"
+                    android:text="test" />
+
+                <TextView
+                    style="@style/addCardTextView"
+                    android:text="test" />
+
+                <TextView
+                    style="@style/addCardTextView"
+                    android:text="test" />
+
+                <TextView
+                    style="@style/addCardTextView"
+                    android:text="test" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="test" />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="test" />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="test" />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="test" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <LinearLayout
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-            <TextView
-                android:text="xxx"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+            <Button
+                android:text="Anuluj"
+                style="@style/addCardBtn" />
 
-            <TextView
-                android:text="xxx"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:text="xxx"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:text="xxx"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
+            <Button
+                android:text="Zapisz"
+                style="@style/addCardBtn" />
         </LinearLayout>
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:text="xxx"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:text="xxx"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:text="xxx"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:text="xxx"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-        </LinearLayout>
-
-
-
-    </LinearLayout>
-
-
-
-
 
 
 </LinearLayout>
