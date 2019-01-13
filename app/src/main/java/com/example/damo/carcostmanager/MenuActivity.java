@@ -1,19 +1,17 @@
 package com.example.damo.carcostmanager;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.LinearLayout;
 
-public class MenuuActivity extends AppCompatActivity {
+public class MenuActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menuu);
+        setContentView(R.layout.activity_menu);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -75,8 +73,19 @@ public class MenuuActivity extends AppCompatActivity {
                     extraContainer.setVisibility(View.GONE);
                 }
                 break;
+
+            case R.id.editCarBtn:
+                extraContainer = (LinearLayout)findViewById(R.id.extraContainerCarInfo);
+
+                if (extraContainer.getVisibility() == View.GONE) {
+                    extraContainer.setVisibility(View.VISIBLE);
+                    return;
+                }
+
+                if (extraContainer.getVisibility() == View.VISIBLE) {
+                    extraContainer.setVisibility(View.GONE);
+                }
+                break;
         }
-
-
     }
 }

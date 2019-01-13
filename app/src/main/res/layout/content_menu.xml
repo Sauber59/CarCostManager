@@ -6,8 +6,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".MenuuActivity"
-    tools:showIn="@layout/activity_menuu"
+    tools:context=".MenuActivity"
+    tools:showIn="@layout/activity_menu"
    >
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,74 +22,98 @@
         app:cardElevation="7dp">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+            style="@style/CaostOtwierajacyLinearLayout">
 
-            <android.support.constraint.ConstraintLayout
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
 
-                <ImageView
-                    android:id="@+id/editCarBtn"
-                    android:src="@drawable/ic_create"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    style="@style/CostCarIconImage" />
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                <ImageView
-                    android:id="@+id/imageView"
-                    android:src="@drawable/car"
-                    app:layout_constraintStart_toStartOf="parent"
-                    style="@style/CostCarImage" />
+                    <ImageView
+                        android:id="@+id/editCarBtn"
+                        style="@style/CostCarIconImage"
+                        android:onClick="click"
+                        android:src="@drawable/ic_touch_app"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginLeft="4dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:orientation="vertical"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/linearLayout2"
-                    app:layout_constraintTop_toTopOf="parent">
+                    <ImageView
+                        android:id="@+id/imageView"
+                        style="@style/CostCarImage"
+                        android:src="@drawable/car"
+                        app:layout_constraintStart_toStartOf="parent" />
 
-                    <TextView
-                        android:text="x"
-                        style="@style/CarInfosTextView" />
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:orientation="vertical"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/linearLayout2"
+                        app:layout_constraintTop_toTopOf="parent">
 
-                    <TextView
-                        style="@style/CarInfosTextView"
-                        android:text="x" />
+                        <TextView
+                            style="@style/CarInfosTextView"
+                            android:text="x" />
 
-                    <TextView
-                        style="@style/CarInfosTextView"
-                        android:text="x" />
-                </LinearLayout>
+                        <TextView
+                            style="@style/CarInfosTextView"
+                            android:text="x" />
 
-                <LinearLayout
-                    android:id="@+id/linearLayout2"
-                    android:layout_marginStart="20dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/imageView"
-                    app:layout_constraintTop_toTopOf="parent"
-                    style="@style/MenuCostColumn">
+                        <TextView
+                            style="@style/CarInfosTextView"
+                            android:text="x" />
+                    </LinearLayout>
 
-                    <TextView
-                        style="@style/CarInfosTextView"
-                        android:text="Marka:" />
+                    <LinearLayout
+                        android:id="@+id/linearLayout2"
+                        style="@style/MenuCostColumn"
+                        android:layout_marginStart="20dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/imageView"
+                        app:layout_constraintTop_toTopOf="parent">
 
-                    <TextView
-                        style="@style/CarInfosTextView"
-                        android:text="Model:" />
+                        <TextView
+                            style="@style/CarInfosTextView"
+                            android:text="Marka:" />
 
-                    <TextView
-                        style="@style/CarInfosTextView"
-                        android:text="Silnik:" />
-                </LinearLayout>
-            </android.support.constraint.ConstraintLayout>
+                        <TextView
+                            style="@style/CarInfosTextView"
+                            android:text="Model:" />
+
+                        <TextView
+                            style="@style/CarInfosTextView"
+                            android:text="Silnik:" />
+
+                    </LinearLayout>
+
+                </android.support.constraint.ConstraintLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/extraContainerCarInfo"
+                style="@style/CostExtraContainer">
+
+                <Button
+                    android:id="@+id/editInfoCarBtn"
+                    style="@style/CostExtraBtn"
+                    android:text="EDYTUJ" />
+
+                <Button
+                    android:id="@+id/statsCarBtn"
+                    style="@style/CostExtraBtn"
+                    android:layout_marginStart="30dp"
+                    android:text="STATYSTYKI" />
+        </LinearLayout>
 
 
         </LinearLayout>
@@ -112,24 +136,23 @@
 
                 <ImageView
                     android:id="@+id/fuelImg"
+                    style="@style/CostTypeIconImageView"
                     android:src="@drawable/paliwo"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    style="@style/CostTypeIconImageView" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
+                    style="@style/CostTittleTextView"
+                    android:layout_height="15dp"
                     android:text="Ostatnie tankowanie"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    tools:layout_editor_absoluteY="0dp"
-                    style="@style/CostTittleTextView"
-                    android:layout_height="15dp"/>
+                    tools:layout_editor_absoluteY="0dp" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
                     android:orientation="vertical"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -137,17 +160,14 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <TextView
-                        android:text="-"
-                        style="@style/CostTypeValueEditText" />
+                        style="@style/CostTypeValueEditText"
+                        android:text="-" />
 
-                    <TextView
-                        style="@style/CostTypeValueEditText" />
+                    <TextView style="@style/CostTypeValueEditText" />
 
-                    <TextView
-                        style="@style/CostTypeValueEditText" />
+                    <TextView style="@style/CostTypeValueEditText" />
 
-                    <TextView
-                        style="@style/CostTypeValueEditText" />
+                    <TextView style="@style/CostTypeValueEditText" />
 
 
                 </LinearLayout>
@@ -158,7 +178,6 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toRightOf="@id/fuelImg"
                     app:layout_constraintTop_toTopOf="parent">
-
 
 
                     <TextView
@@ -196,24 +215,16 @@
                 android:id="@+id/extraContainerFuel"
                 style="@style/CostExtraContainer">
 
-                <LinearLayout
-                    style="@style/CostExtraContainerLayout">
-
                     <Button
-                        android:id="@+id/button4"
+                        android:id="@+id/hisoryFuelBtn"
                         android:text="HISTORIA"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        tools:layout_editor_absoluteX="79dp"
                         style="@style/CostExtraBtn" />
 
-                    <Button
-                        android:id="@+id/button2"
-                        style="@style/CostExtraBtn"
-                        android:layout_marginStart="30dp"
-                        android:text="DODAJ"
-                        app:layout_constraintStart_toEndOf="@+id/button4" />
-
-                </LinearLayout>
+                <Button
+                    android:id="@+id/addFuelBtn"
+                    style="@style/CostExtraBtn"
+                    android:layout_marginStart="30dp"
+                    android:text="DODAJ" />
             </LinearLayout>
 
         </LinearLayout>
@@ -268,7 +279,6 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
                         android:layout_marginLeft="8dp"
                         android:orientation="vertical"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -280,7 +290,6 @@
                             style="@style/CostTypeValueEditText" />
 
                         <TextView
-                            android:id="@+id/textView10"
                             android:text="4234242"
                             style="@style/CostTypeValueEditText"
                             android:textSize="16sp"/>
@@ -304,27 +313,18 @@
                     android:id="@+id/extraContainerService"
                     style="@style/CostExtraContainer">
 
-                    <LinearLayout
-                        style="@style/CostExtraContainerLayout">
-
                         <Button
-                            android:id="@+id/button4"
+                            android:id="@+id/hisoryServiceBtn"
                             style="@style/CostExtraBtn"
-                            android:text="HISTORIA"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            tools:layout_editor_absoluteX="79dp" />
+                            android:text="HISTORIA" />
 
                         <Button
                             android:id="@+id/button2"
                             style="@style/CostExtraBtn"
                             android:layout_marginStart="30dp"
-                            android:text="DODAJ"
-                            app:layout_constraintStart_toEndOf="@+id/button4" />
+                            android:text="DODAJ" />
 
                     </LinearLayout>
-
-
-                </LinearLayout>
 
             </LinearLayout>
 
@@ -359,16 +359,15 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
                         android:layout_marginLeft="8dp"
-                        android:orientation="vertical"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/linearLayout"
-                        app:layout_constraintTop_toTopOf="parent">
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:orientation="vertical">
 
                         <TextView
-                            android:text="-"
-                            style="@style/CostTypeValueEditText" />
+                            style="@style/CostTypeValueEditText"
+                            android:text="-" />
 
                         <TextView
                             android:id="@+id/textView10"
@@ -411,29 +410,18 @@
                     android:id="@+id/extraContainerReview"
                     style="@style/CostExtraContainer">
 
-                    <LinearLayout
-                        style="@style/CostExtraContainerLayout">
-
                         <Button
-                            android:id="@+id/button4"
+                            android:id="@+id/hisoryReviewBtn"
                             style="@style/CostExtraBtn"
-                            android:text="HISTORIA"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            tools:layout_editor_absoluteX="79dp" />
+                            android:text="HISTORIA" />
 
                         <Button
-                            android:id="@+id/button2"
+                            android:id="@+id/addReviewbtn"
                             style="@style/CostExtraBtn"
                             android:layout_marginStart="30dp"
-                            app:cornerRadius="50dp"
-                            android:text="DODAJ"
-                            app:layout_constraintStart_toEndOf="@+id/button4" />
+                            android:text="DODAJ" />
 
                     </LinearLayout>
-
-
-                </LinearLayout>
-
             </LinearLayout>
 
         </android.support.v7.widget.CardView>
@@ -467,7 +455,6 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
                         android:layout_marginLeft="8dp"
                         android:orientation="vertical"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -479,7 +466,6 @@
                             style="@style/CostTypeValueEditText" />
 
                         <TextView
-                            android:id="@+id/textView10"
                             style="@style/CostTypeValueEditText"
                             android:text="10-09-2018"
                             android:textSize="16sp" />
@@ -521,28 +507,18 @@
                     android:id="@+id/extraContainerProtection"
                     style="@style/CostExtraContainer">
 
-                    <LinearLayout
-                        style="@style/CostExtraContainerLayout">
-
                         <Button
-                            android:id="@+id/button8"
+                            android:id="@+id/protectionHistoryBtn"
                             style="@style/CostExtraBtn"
-                            android:text="HISTORIA"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            tools:layout_editor_absoluteX="79dp" />
+                            android:text="HISTORIA" />
 
                         <Button
-                            android:id="@+id/button333"
+                            android:id="@+id/addProtectionBtn"
                             style="@style/CostExtraBtn"
                             android:layout_marginStart="30dp"
-                            android:text="DODAJ"
-                            app:layout_constraintStart_toEndOf="@+id/button4" />
+                            android:text="DODAJ" />
 
                     </LinearLayout>
-
-
-                </LinearLayout>
-
             </LinearLayout>
 
         </android.support.v7.widget.CardView>
