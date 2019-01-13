@@ -37,6 +37,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.damo.carcostmanager.LoginActivity" />
         </activity>
+        <activity
+            android:name=".AddFuelActivity"
+            android:label="@string/title_activity_add_fuel"
+            android:parentActivityName=".MenuuActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.damo.carcostmanager.MenuuActivity" />
+        </activity>
     </application>
 
 </manifest>
