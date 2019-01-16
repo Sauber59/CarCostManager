@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "29844354267-vjrq5p8ro4f565jh28vb6fuod22l4a2g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.damo.carcostmanager",
+            "certificate_hash": "5cf07c4a25b6e3470c30030c8dc5bec33001b94f"
+          }
+        },
+        {
           "client_id": "29844354267-dhq4qnij04ictrt7s0coa37uquvv397u.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +37,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "29844354267-dhq4qnij04ictrt7s0coa37uquvv397u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2

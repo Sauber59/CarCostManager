@@ -34,19 +34,19 @@
 
                 <TextView
                     style="@style/addCardTextView"
-                    android:text="test" />
+                    android:text="Data" />
 
                 <TextView
                     style="@style/addCardTextView"
-                    android:text="test" />
+                    android:text="Ilość" />
 
                 <TextView
                     style="@style/addCardTextView"
-                    android:text="test" />
+                    android:text="Koszt" />
 
                 <TextView
                     style="@style/addCardTextView"
-                    android:text="test" />
+                    android:text="Przebieg" />
 
             </LinearLayout>
 
@@ -57,21 +57,25 @@
                 android:layout_height="wrap_content">
 
                 <EditText
+                    android:id="@+id/dataFuelET"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:hint="test" />
 
                 <EditText
+                    android:id="@+id/quantityFuelET"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:hint="test" />
 
                 <EditText
+                    android:id="@+id/costFuelET"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:hint="test" />
 
                 <EditText
+                    android:id="@+id/distanceFuelET"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:hint="test" />
