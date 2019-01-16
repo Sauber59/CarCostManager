@@ -23,10 +23,10 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/hasloET" />
+        app:layout_constraintTop_toBottomOf="@+id/passwordET" />
 
     <Button
-        android:id="@+id/rejestracjaBtn"
+        android:id="@+id/registerBtn"
         style="?android:textAppearanceSmall"
         android:layout_width="match_parent"
         android:layout_height="52dp"
@@ -58,7 +58,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/hasloET"
+        android:id="@+id/passwordET"
         android:layout_width="245dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -70,7 +70,7 @@
         app:layout_constraintTop_toBottomOf="@+id/loginET" />
 
     <CheckBox
-        android:id="@+id/zapamietajCB"
+        android:id="@+id/rememberCB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="76dp"
@@ -78,6 +78,6 @@
         android:layout_marginTop="4dp"
         android:text="Zapamiętaj"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/hasloET" />
+        app:layout_constraintTop_toBottomOf="@+id/passwordET" />
 
 </android.support.constraint.ConstraintLayout>
