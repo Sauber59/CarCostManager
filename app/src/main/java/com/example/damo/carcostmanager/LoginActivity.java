@@ -45,6 +45,10 @@ public class LoginActivity extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
 
+        if (firebaseAuth.getCurrentUser() != null){
+
+        }
+
         progressDialog = new ProgressDialog(this);
 
         loginET = (EditText)findViewById(R.id.loginET);
@@ -59,12 +63,12 @@ public class LoginActivity extends AppCompatActivity {
         String password = loginET.getText().toString().trim();
 
         if (TextUtils.isEmpty(email)){
-            Toast.makeText(this, "Uzueplenij email", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Uzupełnij email", Toast.LENGTH_SHORT).show();
             return;
         }
 
         if (TextUtils.isEmpty(password)){
-            Toast.makeText(this, "Uzueplenij haslo", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Uzupełnij haslo", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -79,23 +83,54 @@ public class LoginActivity extends AppCompatActivity {
 
                             progressDialog.hide();
                             Toast.makeText(LoginActivity.this, "Rejestracja się powiodła",Toast.LENGTH_SHORT).show();
-
-                            Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
-                            startActivity(intent);
+                            startActivity(new Intent(LoginActivity.this, MenuActivity.class));
                         }else{
                             Toast.makeText(LoginActivity.this, "Rejestracja się nie powiodła", Toast.LENGTH_SHORT).show();
+                            progressDialog.hide();
+                        }
+                    }
+                });
+    }
+
+    private void userLogin() {
+        String email = loginET.getText().toString().trim();
+        String password = loginET.getText().toString().trim();
+
+        if (TextUtils.isEmpty(email)){
+            Toast.makeText(this, "Uzueplenij email", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (TextUtils.isEmpty(password)){
+            Toast.makeText(this, "Uzueplenij haslo", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        progressDialog.setMessage("Logowanie w trakcie.. ");
+        progressDialog.show();
+
+        firebaseAuth.signInWithEmailAndPassword(email,password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        //progressDialog.dismiss();
+                        if (task.isSuccessful()){
+                            progressDialog.hide();
+                            Toast.makeText(LoginActivity.this, "Zalogowano",Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(LoginActivity.this, MenuActivity.class));
+                        }else{
+                            Toast.makeText(LoginActivity.this, "Logowanie się nie powiodło", Toast.LENGTH_SHORT).show();
+                            progressDialog.hide();
                         }
                     }
                 });
     }
 
     public void click(View view) {
-        Intent intent = null;
         switch (view.getId()){
 
             case R.id.loginBtn:
-                intent = new Intent(LoginActivity.this, MenuActivity.class);
-                startActivity(intent);
+                userLogin();
                 break;
 
             case R.id.registerBtn:
