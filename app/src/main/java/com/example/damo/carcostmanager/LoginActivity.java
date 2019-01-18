@@ -32,6 +32,10 @@ public class LoginActivity extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuth;
 
+    private String rememberedEmail = "";
+    private String rememberedPassword = "";
+    boolean rememberFlag = false;
+
 
 
     @Override
@@ -45,10 +49,6 @@ public class LoginActivity extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
 
-        if (firebaseAuth.getCurrentUser() != null){
-
-        }
-
         progressDialog = new ProgressDialog(this);
 
         loginET = (EditText)findViewById(R.id.loginET);
@@ -56,6 +56,14 @@ public class LoginActivity extends AppCompatActivity {
         rememberCB = (CheckBox) findViewById(R.id.rememberCB);
         loginBtn = (Button) findViewById(R.id.loginBtn);
         registerBtn = (Button) findViewById(R.id.registerBtn);
+
+        // TODO: 16.01.2019 Dokończyć zapamiętywanie loginu i hasla 
+        if (rememberFlag == true){
+            loginET.setText(rememberedEmail);
+            passwordET.setText(rememberedPassword);
+
+            rememberCB.setChecked(true);
+        }
     }
 
     private void registerUser(){
@@ -97,12 +105,12 @@ public class LoginActivity extends AppCompatActivity {
         String password = loginET.getText().toString().trim();
 
         if (TextUtils.isEmpty(email)){
-            Toast.makeText(this, "Uzueplenij email", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Uzupełnij email", Toast.LENGTH_SHORT).show();
             return;
         }
 
         if (TextUtils.isEmpty(password)){
-            Toast.makeText(this, "Uzueplenij haslo", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Uzupełnij haslo", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -136,6 +144,17 @@ public class LoginActivity extends AppCompatActivity {
             case R.id.registerBtn:
                 registerUser();
                 break;
+// TODO: 16.01.2019 Dokonczyn zapamietywanie loginu i hasla 
+            case R.id.rememberCB:
+                if (rememberCB.isChecked()){
+                    rememberedEmail = loginET.getText().toString().trim();
+                    rememberedPassword = passwordET.getText().toString().trim();
+                    rememberFlag = true;
+                }else{
+                    rememberedEmail = "";
+                    rememberedPassword = "";
+                    rememberFlag = false;
+                }
         }
 
     }

@@ -70,6 +70,7 @@
         app:layout_constraintTop_toBottomOf="@+id/loginET" />
 
     <CheckBox
+        android:onClick="click"
         android:id="@+id/rememberCB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

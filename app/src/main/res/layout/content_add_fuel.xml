@@ -91,13 +91,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-            <Button
-                android:text="Anuluj"
-                style="@style/addCardBtn" />
+        <Button
+            android:id="@+id/fuelCancelBtn"
+            style="@style/addCardBtn"
+            android:text="Anuluj" />
 
-            <Button
-                android:text="Zapisz"
-                style="@style/addCardBtn" />
+        <Button
+            android:id="@+id/fuelSaveBtn"
+            android:onClick="click"
+            style="@style/addCardBtn"
+            android:text="Zapisz" />
         </LinearLayout>
 
 
