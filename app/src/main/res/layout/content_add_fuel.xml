@@ -94,7 +94,8 @@
         <Button
             android:id="@+id/fuelCancelBtn"
             style="@style/addCardBtn"
-            android:text="Anuluj" />
+            android:text="Anuluj"
+            android:onClick="click"/>
 
         <Button
             android:id="@+id/fuelSaveBtn"

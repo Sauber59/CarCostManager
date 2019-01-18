@@ -1,10 +1,12 @@
 package com.example.damo.carcostmanager;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,7 +34,9 @@ public class AddFuelActivity extends AppCompatActivity {
     private Button fuelCancelBtn;
     private Button fuelSaveBtn;
 
-    private DatabaseReference databaseReference;
+    private ProgressDialog progressDialog;
+
+    private DatabaseReference databaseCosts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,20 +53,13 @@ public class AddFuelActivity extends AppCompatActivity {
         fuelCancelBtn = (Button) findViewById(R.id.fuelCancelBtn);
         fuelSaveBtn = (Button) findViewById(R.id.fuelSaveBtn);
 
+        progressDialog = new ProgressDialog(this);
+
         firebaseAuth = FirebaseAuth.getInstance();
 
-        /* if user no login
-        if (firebaseAuth.getCurrentUser() == null){
-            //zamknij aktywnosc
-            finish();
-            startActivity(new Intent(this, LoginActivity.class));
-        }         */
-
-        databaseReference = FirebaseDatabase.getInstance().getReference();
+        databaseCosts = FirebaseDatabase.getInstance().getReference("Costs");
 
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-
-
     }
 
     private void sendCostInformation(){
@@ -71,22 +68,29 @@ public class AddFuelActivity extends AppCompatActivity {
         String quantity = quantityFuelET.getText().toString().trim();
         String distance = distanceFuelET.getText().toString().trim();
 
-        Toast.makeText(getApplicationContext(), "Zapisywanie danych..", Toast.LENGTH_SHORT).show();
+        if (TextUtils.isEmpty(data) || TextUtils.isEmpty(cost) || TextUtils.isEmpty(cost)
+                || TextUtils.isEmpty(quantity) || TextUtils.isEmpty(distance)){
+            Toast.makeText(this, "Uzupełnij wszystkie dane!", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
-        CostInformation costInformation = new CostInformation(data,cost,quantity,distance);
+        progressDialog.setMessage("Zapisywanie danych.. ");
+        progressDialog.show();
+
+        String id = databaseCosts.push().getKey();
+        CostInformation costInformation = new CostInformation(id, data,cost,quantity,distance);
         FirebaseUser user = firebaseAuth.getCurrentUser();
-        databaseReference.child(user.getUid()).push().setValue(costInformation).addOnCompleteListener(new OnCompleteListener<Void>() {
+
+        databaseCosts.child(user.getUid()).setValue(costInformation).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
 
                 if (task.isSuccessful()){
-                    dataFuetET.setText(null);
-                    costFuelET.setText(null);
-                    quantityFuelET.setText(null);
-                    distanceFuelET.setText(null);
+                    progressDialog.hide();
                     Toast.makeText(getApplicationContext(), "Dodano", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(AddFuelActivity.this, MenuActivity.class));
                 }else{
+                    progressDialog.hide();
                     Toast.makeText(getApplicationContext(), "Dodawanie się nie powiodło", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -97,8 +101,6 @@ public class AddFuelActivity extends AppCompatActivity {
         switch (view.getId()){
             case (R.id.fuelSaveBtn):
                 sendCostInformation();
-
-                //startActivity(new Intent(AddFuelActivity.this, MenuActivity.class));
                 break;
 
             case (R.id.fuelCancelBtn):
