@@ -19,9 +19,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class AddFuelActivity extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuth;
@@ -58,8 +55,6 @@ public class AddFuelActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
 
         databaseCosts = FirebaseDatabase.getInstance().getReference("Costs");
-
-        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
     }
 
     private void sendCostInformation(){
@@ -78,10 +73,10 @@ public class AddFuelActivity extends AppCompatActivity {
         progressDialog.show();
 
         String id = databaseCosts.push().getKey();
-        CostInformation costInformation = new CostInformation(id, data,cost,quantity,distance);
+        Cost costInformation = new Cost(id, data,cost,quantity,distance);
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
-        databaseCosts.child(user.getUid()).setValue(costInformation).addOnCompleteListener(new OnCompleteListener<Void>() {
+        databaseCosts.child(user.getUid()).child(id).setValue(costInformation).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
 
