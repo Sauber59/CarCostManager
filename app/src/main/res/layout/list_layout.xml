@@ -1,38 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:paddingLeft="8dp"
-    android:paddingRight="8dp"
-    android:paddingTop="3dp"
-    android:paddingBottom="3dp">
+    app:cardCornerRadius="10dp">
 
-
-    <TextView
-        android:text="textView"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-        android:id="@+id/dataTV"
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp">
 
-    <TextView
-        android:text="textView"
-        android:id="@+id/costTV"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
 
-    <TextView
-        android:text="textView"
-        android:id="@+id/quantityTV"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/dataTV"
+            style="@style/ListTitleTextView"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:gravity="center"
+            android:text="textView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:text="textView"
-        android:id="@+id/distanceTV"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
 
-</LinearLayout>
+        <ImageView
+            android:id="@+id/image"
+            style="@style/CostCarIconImage"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:src="@drawable/paliwo"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.491" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="108dp"
+            android:layout_marginLeft="108dp"
+            android:orientation="vertical"
+            android:padding="6dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dataTV">
+
+            <TextView
+                style="@style/ListTextView"
+                android:text="Ilość" />
+
+            <TextView
+                style="@style/ListTextView"
+                android:text="Koszt" />
+
+            <TextView
+                style="@style/ListTextView"
+                android:text="Przebieg" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout4"
+            android:layout_width="76dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:orientation="vertical"
+            android:padding="6dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/linearLayout3"
+            app:layout_constraintTop_toBottomOf="@+id/dataTV">
+
+            <TextView
+                android:id="@+id/costTV"
+                style="@style/ListTextValueView"
+                android:text="textView" />
+
+            <TextView
+                android:id="@+id/quantityTV"
+                style="@style/ListTextValueView"
+                android:text="textView" />
+
+            <TextView
+                android:id="@+id/distanceTV"
+                style="@style/ListTextValueView"
+                android:text="textView" />
+        </LinearLayout>
+    </android.support.constraint.ConstraintLayout>
+</android.support.v7.widget.CardView>

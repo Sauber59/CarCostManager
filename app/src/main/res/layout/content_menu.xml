@@ -143,6 +143,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
+                    android:id="@+id/textView5"
                     style="@style/CostTittleTextView"
                     android:layout_height="15dp"
                     android:text="Ostatnie tankowanie"
@@ -175,6 +176,8 @@
                 <LinearLayout
                     android:id="@+id/linearLayout"
                     style="@style/MenuCostColumn"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toRightOf="@id/fuelImg"
                     app:layout_constraintTop_toTopOf="parent">
