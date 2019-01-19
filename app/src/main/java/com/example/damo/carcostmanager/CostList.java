@@ -35,9 +35,9 @@ public class CostList extends ArrayAdapter<Cost> {
         Cost cost = costList.get(position);
 
         dataTV.setText(cost.getData());
-        costTV.setText(cost.getCost());
-        quantityTV.setText(cost.getQuantity());
-        distanceTV.setText(cost.getDistance());
+        costTV.setText(cost.getCost() + " zł");
+        quantityTV.setText(cost.getQuantity() + " l");
+        distanceTV.setText(cost.getDistance() + " km");
 
         return listViewItem;
     }

@@ -57,32 +57,32 @@
                 android:layout_height="wrap_content">
 
                 <EditText
+                    android:onClick="click"
                     android:inputType="date"
                     android:id="@+id/dataFuelET"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="test" />
+                    android:layout_height="wrap_content" />
 
                 <EditText
                     android:inputType="number"
                     android:id="@+id/quantityFuelET"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="test" />
+                    android:hint="litr" />
 
                 <EditText
                     android:inputType="number"
                     android:id="@+id/costFuelET"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="test" />
+                    android:hint="zł" />
 
                 <EditText
                     android:inputType="number"
                     android:id="@+id/distanceFuelET"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="test" />
+                    android:hint="km" />
 
             </LinearLayout>
         </LinearLayout>

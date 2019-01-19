@@ -78,12 +78,12 @@
             app:layout_constraintTop_toBottomOf="@+id/dataTV">
 
             <TextView
-                android:id="@+id/costTV"
+                android:id="@+id/quantityTV"
                 style="@style/ListTextValueView"
                 android:text="textView" />
 
             <TextView
-                android:id="@+id/quantityTV"
+                android:id="@+id/costTV"
                 style="@style/ListTextValueView"
                 android:text="textView" />
 
