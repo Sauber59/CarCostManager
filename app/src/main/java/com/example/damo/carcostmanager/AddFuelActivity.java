@@ -76,12 +76,12 @@ public class AddFuelActivity extends AppCompatActivity {
 
     private void sendCostInformation(){
         String data = dataFuetET.getText().toString().trim();
-        String cost = costFuelET.getText().toString().trim();
-        String quantity = quantityFuelET.getText().toString().trim();
-        String distance = distanceFuelET.getText().toString().trim();
+        float cost = Float.parseFloat(costFuelET.getText().toString().trim());
+        float quantity = Float.parseFloat(quantityFuelET.getText().toString().trim());
+        float distance = Float.parseFloat(distanceFuelET.getText().toString().trim());
 
-        if (TextUtils.isEmpty(data) || TextUtils.isEmpty(cost) || TextUtils.isEmpty(cost)
-                || TextUtils.isEmpty(quantity) || TextUtils.isEmpty(distance)){
+        if (TextUtils.isEmpty(data) || TextUtils.isEmpty(costFuelET.getText())
+                || TextUtils.isEmpty(quantityFuelET.getText()) || TextUtils.isEmpty(distanceFuelET.getText())){
             Toast.makeText(this, "Uzupełnij wszystkie dane!", Toast.LENGTH_SHORT).show();
             return;
         }

@@ -171,12 +171,12 @@
                         android:text="- km" />
 
                     <TextView
-                        android:id="@+id/fuelConsumptionTV"
+                        android:id="@+id/fuelQuantityTV"
                         style="@style/CostTypeValueEditText"
                         android:text="- l" />
 
                     <TextView
-                        android:id="@+id/fuelAverageConsumptionTV"
+                        android:id="@+id/fuelConsumptionTV"
                         style="@style/CostTypeValueEditText"
                         android:text="- l" />
 
@@ -203,11 +203,11 @@
 
                     <TextView
                         style="@style/CostTypeTextView"
-                        android:text="Spalanie:" />
+                        android:text="Ilość:" />
 
                     <TextView
                         style="@style/CostTypeTextView"
-                        android:text="Średnie:" />
+                        android:text="Spalanie:" />
 
 
                 </LinearLayout>

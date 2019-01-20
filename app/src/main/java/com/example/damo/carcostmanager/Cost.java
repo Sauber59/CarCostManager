@@ -4,15 +4,15 @@ public class Cost {
 
     String idCost;
     String data;
-    String cost;
-    String quantity;
-    String distance;
+    float cost;
+    float quantity;
+    float distance;
 
     public Cost(){
 
     }
 
-    public Cost(String idCost, String data, String cost, String quantity, String distance) {
+    public Cost(String idCost, String data, float cost, float quantity, float distance) {
         this.idCost = idCost;
         this.data = data;
         this.cost = cost;
@@ -28,15 +28,15 @@ public class Cost {
         return data;
     }
 
-    public String getCost() {
+    public float getCost() {
         return cost;
     }
 
-    public String getQuantity() {
+    public float getQuantity() {
         return quantity;
     }
 
-    public String getDistance() {
+    public float getDistance() {
         return distance;
     }
 
@@ -48,15 +48,15 @@ public class Cost {
         this.data = data;
     }
 
-    public void setCost(String cost) {
+    public void setCost(float cost) {
         this.cost = cost;
     }
 
-    public void setQuantity(String quantity) {
+    public void setQuantity(float quantity) {
         this.quantity = quantity;
     }
 
-    public void setDistance(String distance) {
+    public void setDistance(float distance) {
         this.distance = distance;
     }
 }

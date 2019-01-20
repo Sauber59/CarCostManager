@@ -25,14 +25,15 @@ public class MenuActivity extends AppCompatActivity {
 
     TextView fuelCostTV;
     TextView fuelDistanceTV;
+    TextView fuelQuantityTV;
     TextView fuelConsumptionTV;
-    TextView fuelAverageConsumptionTV;
 
     private DatabaseReference databaseCosts;
     private FirebaseAuth firebaseAuth;
 
     List<Cost> costList;
     Cost lastFuel;
+    Cost beforeLastFuel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +48,7 @@ public class MenuActivity extends AppCompatActivity {
         fuelCostTV = (TextView) findViewById(R.id.fuelCostTV);
         fuelDistanceTV= (TextView) findViewById(R.id.fuelDistanceTV);
         fuelConsumptionTV= (TextView) findViewById(R.id.fuelConsumptionTV);
-        fuelAverageConsumptionTV= (TextView) findViewById(R.id.fuelAverageConsumptionTV);
+        fuelQuantityTV= (TextView) findViewById(R.id.fuelQuantityTV);
 
 
 
@@ -76,8 +77,12 @@ public class MenuActivity extends AppCompatActivity {
                 }
 
                 lastFuel = costList.get(costList.size() - 1);
-                fuelCostTV.setText(lastFuel.getCost().toString());
-
+                beforeLastFuel = costList.get(costList.size() - 2);
+                float distance = lastFuel.getDistance() - beforeLastFuel.getDistance();
+                fuelCostTV.setText(Float.toString(lastFuel.getCost()) + " zł");
+                fuelDistanceTV.setText(Float.toString(distance) + " km");
+                fuelQuantityTV.setText(Float.toString(lastFuel.getQuantity()) + " l");
+                fuelConsumptionTV.setText(Float.toString(lastFuel.getQuantity() / distance * 100) + " l");
             }
 
             @Override
@@ -88,29 +93,6 @@ public class MenuActivity extends AppCompatActivity {
 }
 
 
-
-
-    public void getCostList(final List<Cost> list, DatabaseReference databaseRef){
-
-        databaseRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                list.clear();
-
-                for (DataSnapshot costSnapshot : dataSnapshot.getChildren()){
-                    Cost cost = costSnapshot.getValue(Cost.class);
-
-                    list.add(cost);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-    });
-    }
 
     public int test(int a, int b){
         return a+b;
