@@ -2,11 +2,11 @@ package com.example.damo.carcostmanager;
 
 public class Cost {
 
-    String idCost;
-    String data;
-    float cost;
-    float quantity;
-    float distance;
+    private String idCost;
+    private String data;
+    private float cost;
+    private float quantity;
+    private float distance;
 
     public Cost(){
 

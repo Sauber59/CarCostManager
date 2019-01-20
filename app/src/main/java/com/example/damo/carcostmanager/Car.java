@@ -2,10 +2,9 @@ package com.example.damo.carcostmanager;
 
 public class Car {
 
-    String idCar;
-    String brand;
-    String model;
-    String engine;
+    private String brand;
+    private String model;
+    private String engine;
 
     public Car(){
 

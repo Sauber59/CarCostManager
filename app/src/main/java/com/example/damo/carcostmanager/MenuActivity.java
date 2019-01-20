@@ -23,17 +23,24 @@ import java.util.List;
 
 public class MenuActivity extends AppCompatActivity {
 
+    TextView carBrandTV;
+    TextView carModelTV;
+    TextView carEngineInfoTV;
+
     TextView fuelCostTV;
     TextView fuelDistanceTV;
     TextView fuelQuantityTV;
     TextView fuelConsumptionTV;
 
     private DatabaseReference databaseCosts;
+    private DatabaseReference databaseCar;
     private FirebaseAuth firebaseAuth;
 
     List<Cost> costList;
     Cost lastFuel;
     Cost beforeLastFuel;
+
+    Car carInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,50 +50,71 @@ public class MenuActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        costList = new ArrayList<>();
+        carBrandTV= (TextView) findViewById(R.id.carBrandTV);
+        carModelTV= (TextView) findViewById(R.id.carModelTV);
+        carEngineInfoTV= (TextView) findViewById(R.id.carEngineInfoTV);
 
         fuelCostTV = (TextView) findViewById(R.id.fuelCostTV);
         fuelDistanceTV= (TextView) findViewById(R.id.fuelDistanceTV);
         fuelConsumptionTV= (TextView) findViewById(R.id.fuelConsumptionTV);
         fuelQuantityTV= (TextView) findViewById(R.id.fuelQuantityTV);
 
-
-
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
-        String databaseRef = "Costs/" + user.getUid().toString();
-        databaseCosts = FirebaseDatabase.getInstance().getReference(databaseRef);
+        databaseCosts = FirebaseDatabase.getInstance().getReference("Costs/" + user.getUid().toString());
+        databaseCar = FirebaseDatabase.getInstance().getReference("Car/");
 
-        //getCostList(costList, databaseCosts);
+        costList = new ArrayList<>();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
 
+        databaseCar.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.hasChildren()) {
+
+                    for (DataSnapshot carSnapshot : dataSnapshot.getChildren()){
+                        carInfo = carSnapshot.getValue(Car.class);
+                        carBrandTV.setText(carInfo.getBrand());
+                        carModelTV.setText(carInfo.getModel());
+                        carEngineInfoTV.setText(carInfo.getEngine());
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
         databaseCosts.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.hasChildren()) {
+                    costList.clear();
 
-                costList.clear();
+                    for (DataSnapshot costSnapshot : dataSnapshot.getChildren()) {
+                        Cost cost = costSnapshot.getValue(Cost.class);
 
-                for (DataSnapshot costSnapshot : dataSnapshot.getChildren()){
-                    Cost cost = costSnapshot.getValue(Cost.class);
+                        costList.add(cost);
+                    }
 
-                    costList.add(cost);
-                }
+                    if (costList.size() > 0) {
+                        lastFuel = costList.get(costList.size() - 1);
+                        fuelCostTV.setText(Float.toString(lastFuel.getCost()) + " zł");
+                        fuelQuantityTV.setText(Float.toString(lastFuel.getQuantity()) + " l");
+                    }
 
-                if (costList.size() > 0) {
-                    lastFuel = costList.get(costList.size() - 1);
-                    fuelCostTV.setText(Float.toString(lastFuel.getCost()) + " zł");
-                    fuelQuantityTV.setText(Float.toString(lastFuel.getQuantity()) + " l");
-                }
-
-                if (costList.size() > 1) {
-                    beforeLastFuel = costList.get(costList.size() - 2);
-                    float distance = lastFuel.getDistance() - beforeLastFuel.getDistance();
-                    fuelDistanceTV.setText(Float.toString(distance) + " km");
-                    fuelConsumptionTV.setText(Float.toString(lastFuel.getQuantity() / distance * 100) + " l");
+                    if (costList.size() > 1) {
+                        beforeLastFuel = costList.get(costList.size() - 2);
+                        float distance = lastFuel.getDistance() - beforeLastFuel.getDistance();
+                        fuelDistanceTV.setText(Float.toString(distance) + " km");
+                        fuelConsumptionTV.setText(Float.toString(lastFuel.getQuantity() / distance * 100) + " l");
+                    }
                 }
             }
 
