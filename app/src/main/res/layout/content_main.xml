@@ -75,6 +75,7 @@
         android:layout_height="wrap_content"
         android:text="CarCostManager"
         android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+        android:textColor="@color/colorPrimaryDark"
         android:textStyle="bold"
         android:typeface="normal"
         app:fontFamily="sans-serif"

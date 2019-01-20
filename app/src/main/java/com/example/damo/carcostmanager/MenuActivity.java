@@ -76,13 +76,18 @@ public class MenuActivity extends AppCompatActivity {
                     costList.add(cost);
                 }
 
-                lastFuel = costList.get(costList.size() - 1);
-                beforeLastFuel = costList.get(costList.size() - 2);
-                float distance = lastFuel.getDistance() - beforeLastFuel.getDistance();
-                fuelCostTV.setText(Float.toString(lastFuel.getCost()) + " zł");
-                fuelDistanceTV.setText(Float.toString(distance) + " km");
-                fuelQuantityTV.setText(Float.toString(lastFuel.getQuantity()) + " l");
-                fuelConsumptionTV.setText(Float.toString(lastFuel.getQuantity() / distance * 100) + " l");
+                if (costList.size() > 0) {
+                    lastFuel = costList.get(costList.size() - 1);
+                    fuelCostTV.setText(Float.toString(lastFuel.getCost()) + " zł");
+                    fuelQuantityTV.setText(Float.toString(lastFuel.getQuantity()) + " l");
+                }
+
+                if (costList.size() > 1) {
+                    beforeLastFuel = costList.get(costList.size() - 2);
+                    float distance = lastFuel.getDistance() - beforeLastFuel.getDistance();
+                    fuelDistanceTV.setText(Float.toString(distance) + " km");
+                    fuelConsumptionTV.setText(Float.toString(lastFuel.getQuantity() / distance * 100) + " l");
+                }
             }
 
             @Override
