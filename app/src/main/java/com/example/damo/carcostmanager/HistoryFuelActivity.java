@@ -15,11 +15,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class HistoryFuelActivity extends AppCompatActivity {
 
     ListView listViewCosts;
+
     private DatabaseReference databaseCosts;
     private FirebaseAuth firebaseAuth;
 
@@ -50,25 +52,27 @@ public class HistoryFuelActivity extends AppCompatActivity {
         super.onStart();
 
         databaseCosts.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                costLists.clear();
+                    costLists.clear();
 
-                for (DataSnapshot costSnapshot : dataSnapshot.getChildren()){
-                    Cost cost = costSnapshot.getValue(Cost.class);
+                    for (DataSnapshot costSnapshot : dataSnapshot.getChildren()){
+                        Cost cost = costSnapshot.getValue(Cost.class);
 
-                    costLists.add(cost);
+                        costLists.add(cost);
+                    }
+
+
+                    Collections.reverse(costLists);  //odwrócenie kolejności
+                    CostList adapter = new CostList(HistoryFuelActivity.this, costLists);
+                    listViewCosts.setAdapter(adapter);
                 }
 
-                CostList adapter = new CostList(HistoryFuelActivity.this, costLists);
-                listViewCosts.setAdapter(adapter);
-            }
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
+                }
         });
     }
 }

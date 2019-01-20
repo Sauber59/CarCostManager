@@ -161,14 +161,24 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <TextView
+                        android:id="@+id/fuelCostTV"
                         style="@style/CostTypeValueEditText"
-                        android:text="-" />
+                        android:text="- zł" />
 
-                    <TextView style="@style/CostTypeValueEditText" />
+                    <TextView
+                        android:id="@+id/fuelDistanceTV"
+                        style="@style/CostTypeValueEditText"
+                        android:text="- km" />
 
-                    <TextView style="@style/CostTypeValueEditText" />
+                    <TextView
+                        android:id="@+id/fuelConsumptionTV"
+                        style="@style/CostTypeValueEditText"
+                        android:text="- l" />
 
-                    <TextView style="@style/CostTypeValueEditText" />
+                    <TextView
+                        android:id="@+id/fuelAverageConsumptionTV"
+                        style="@style/CostTypeValueEditText"
+                        android:text="- l" />
 
 
                 </LinearLayout>
