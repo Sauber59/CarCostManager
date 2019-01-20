@@ -182,27 +182,36 @@ public class MenuActivity extends AppCompatActivity {
             case (R.id.addFuelBtn):
                 intent = new Intent(MenuActivity.this, AddFuelActivity.class);
                 startActivity(intent);
+                break;
         }
 
         switch (view.getId()){
             case (R.id.addSeriveBtn):
                 intent = new Intent(MenuActivity.this, AddServiceActivity.class);
                 startActivity(intent);
+                break;
         }
 
         switch (view.getId()){
             case (R.id.addProtectionBtn):
                 intent = new Intent(MenuActivity.this, AddProtectionActivity.class);
                 startActivity(intent);
+                break;
         }
 
         switch (view.getId()){
             case (R.id.addReviewbtn):
                 intent = new Intent(MenuActivity.this, AddReviewActivity.class);
                 startActivity(intent);
+                break;
         }
 
-
+        switch (view.getId()){
+            case (R.id.editInfoCarBtn):
+                intent = new Intent(MenuActivity.this, CarInfoActivity.class);
+                startActivity(intent);
+                break;
+        }
     }
 
     public void clickHistory(View view) {
@@ -212,24 +221,34 @@ public class MenuActivity extends AppCompatActivity {
             case (R.id.hisoryFuelBtn):
                 intent = new Intent(MenuActivity.this, HistoryFuelActivity.class);
                 startActivity(intent);
+                break;
         }
 
         switch (view.getId()){
             case (R.id.historyServiceBtn):
                 intent = new Intent(MenuActivity.this, HistoryServiceActivity.class);
                 startActivity(intent);
+                break;
         }
 
         switch (view.getId()){
             case (R.id.historyProtectionBtn):
                 intent = new Intent(MenuActivity.this, HistoryProtectionActivity.class);
                 startActivity(intent);
+                break;
         }
 
         switch (view.getId()){
             case (R.id.hisoryReviewBtn):
                 intent = new Intent(MenuActivity.this, HistoryReviewActivity.class);
                 startActivity(intent);
+                break;
+        }
+        switch (view.getId()){
+            case (R.id.statsCarBtn):
+                intent = new Intent(MenuActivity.this, StatsActivity.class);
+                startActivity(intent);
+                break;
         }
     }
 }

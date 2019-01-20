@@ -104,11 +104,13 @@
                 style="@style/CostExtraContainer">
 
                 <Button
+                    android:onClick="clickAdd"
                     android:id="@+id/editInfoCarBtn"
                     style="@style/CostExtraBtn"
                     android:text="EDYTUJ" />
 
                 <Button
+                    android:onClick="clickHistory"
                     android:id="@+id/statsCarBtn"
                     style="@style/CostExtraBtn"
                     android:layout_marginStart="30dp"

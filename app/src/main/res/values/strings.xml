@@ -13,4 +13,6 @@
     <string name="title_activity_history_service">HistoryServiceActivity</string>
     <string name="title_activity_history_review">HistoryReviewActivity</string>
     <string name="title_activity_history_protection">HistoryProtectionActivity</string>
+    <string name="title_activity_stats">StatsActivity</string>
+    <string name="title_activity_car_info">CarInfoActivity</string>
 </resources>

@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.damo.carcostmanager">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -105,6 +105,24 @@
         <activity
             android:name=".HistoryProtectionActivity"
             android:label="@string/title_activity_history_protection"
+            android:parentActivityName=".MenuActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.damo.carcostmanager.MenuActivity" />
+        </activity>
+        <activity
+            android:name=".StatsActivity"
+            android:label="@string/title_activity_stats"
+            android:parentActivityName=".MenuActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.damo.carcostmanager.MenuActivity" />
+        </activity>
+        <activity
+            android:name=".CarInfoActivity"
+            android:label="@string/title_activity_car_info"
             android:parentActivityName=".MenuActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
