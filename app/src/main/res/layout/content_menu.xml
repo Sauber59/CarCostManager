@@ -16,7 +16,7 @@
 
     <!--pojazd info -->
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         style="@style/CostTypeCardView"
         android:layout_margin="0dp"
         app:cardElevation="7dp">
@@ -30,7 +30,7 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
-                <android.support.constraint.ConstraintLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -99,7 +99,7 @@
 
                     </LinearLayout>
 
-                </android.support.constraint.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -123,19 +123,19 @@
 
         </LinearLayout>
 
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
         <View
             android:id="@+id/a"
             style="@style/Line" />
 
     <!--średnie spalanie -->
-         <android.support.v7.widget.CardView
+         <androidx.cardview.widget.CardView
              style="@style/CostTypeCardView">
 
         <LinearLayout style="@style/CaostOtwierajacyLinearLayout">
 
-            <android.support.constraint.ConstraintLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -226,7 +226,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
 
-            </android.support.constraint.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <LinearLayout
                 android:id="@+id/extraContainerFuel"
@@ -248,16 +248,16 @@
 
         </LinearLayout>
 
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
     <!--ostatni serwis -->
 
-        <android.support.v7.widget.CardView
+        <androidx.cardview.widget.CardView
             style="@style/CostTypeCardView">
 
             <LinearLayout style="@style/CaostOtwierajacyLinearLayout">
 
-                <android.support.constraint.ConstraintLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -328,7 +328,7 @@
                         app:layout_constraintTop_toTopOf="parent"/>
 
 
-                </android.support.constraint.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <LinearLayout
                     android:id="@+id/extraContainerService"
@@ -351,16 +351,16 @@
 
             </LinearLayout>
 
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
     <!--ostatni przeglad -->
 
-        <android.support.v7.widget.CardView
+        <androidx.cardview.widget.CardView
             style="@style/CostTypeCardView">
 
             <LinearLayout style="@style/CaostOtwierajacyLinearLayout">
 
-                <android.support.constraint.ConstraintLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -429,7 +429,7 @@
                         app:layout_constraintTop_toTopOf="parent"/>
 
 
-                </android.support.constraint.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <LinearLayout
                     android:id="@+id/extraContainerReview"
@@ -451,16 +451,16 @@
                     </LinearLayout>
             </LinearLayout>
 
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
     <!--ostatnie ubezpieczenie -->
 
-        <android.support.v7.widget.CardView
+        <androidx.cardview.widget.CardView
             style="@style/CostTypeCardView">
 
             <LinearLayout style="@style/CaostOtwierajacyLinearLayout">
 
-                <android.support.constraint.ConstraintLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -530,7 +530,7 @@
                         app:layout_constraintTop_toTopOf="parent"/>
 
 
-                </android.support.constraint.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <LinearLayout
                     android:id="@+id/extraContainerProtection"
@@ -552,7 +552,7 @@
                     </LinearLayout>
             </LinearLayout>
 
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
     </LinearLayout>
 
 </ScrollView>
