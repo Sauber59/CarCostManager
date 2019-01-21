@@ -148,7 +148,6 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/textView5"
                     style="@style/CostTittleTextView"
                     android:layout_height="15dp"
                     android:text="Ostatnie tankowanie"

@@ -23,7 +23,7 @@
 
             <TextView
                 android:gravity="center"
-                android:text="CALOŚĆ"
+                android:text="CAłOŚĆ"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/CostTittleTextView"/>
@@ -44,47 +44,51 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Całkowity koszt:" />
+                        android:text="Całkowity koszt eksploatacji:" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Całkowity dystans" />
+                        android:text="Całkowity przejechany dystans:" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Koszt kilometra:" />
+                        android:text="Całkowity koszt kilometra:" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="18dp"
-                        android:text="Średni całkowity koszt miesięczny" />
+                        android:text="Średni koszt miesięczny:" />
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_marginLeft="25dp"
+                    android:layout_marginLeft="15dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     app:layout_constraintStart_toEndOf="@+id/linearLayout5">
 
                     <TextView
+                        android:id="@+id/totalCostTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="xxxxxxxxxxxxx" />
 
                     <TextView
+                        android:id="@+id/totalDistanceTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="xxxxxxxxxxxxx" />
 
                     <TextView
+                        android:id="@+id/kilometerCostTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="xxxxxxxxxxxxx" />
 
                     <TextView
+                        android:id="@+id/averageKilometerCostTV"
                         android:layout_width="wrap_content"
                         android:layout_height="18dp"
                         android:text="xxxxxxxxxxxxx" />
@@ -132,7 +136,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="18dp"
-                        android:text="Średni spalanie:" />
+                        android:text="Średnie spalanie:" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -143,16 +147,19 @@
                     app:layout_constraintStart_toEndOf="@+id/linearLayout5">
 
                     <TextView
+                        android:id="@+id/totalFuelQuantityTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="xxxxxxxxxxxxx" />
 
                     <TextView
+                        android:id="@+id/totalFuelCostTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="xxxxxxxxxxxxx" />
 
                     <TextView
+                        android:id="@+id/totalAverageFuelConsumptionTV"
                         android:layout_width="wrap_content"
                         android:layout_height="18dp"
                         android:text="xxxxxxxxxxxxx" />
@@ -195,7 +202,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Liczba przeglądów:" /> />
+                        android:text="Liczba serwisów:" /> />
                 </LinearLayout>
 
                 <LinearLayout
@@ -206,11 +213,13 @@
                     app:layout_constraintStart_toEndOf="@+id/linearLayout5">
 
                     <TextView
+                        android:id="@+id/totalServiceCostTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="xxxxxxxxxxxxx" />
 
                     <TextView
+                        android:id="@+id/totalCountServiceTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="xxxxxxxxxxxxx" />
@@ -266,11 +275,13 @@
                     app:layout_constraintStart_toEndOf="@+id/linearLayout5">
 
                     <TextView
+                        android:id="@+id/totalReviewCostTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="xxxxxxxxxxxxx" />
 
                     <TextView
+                        android:id="@+id/totalQuantityReviewTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="xxxxxxxxxxxxx" />
@@ -326,11 +337,13 @@
                     app:layout_constraintStart_toEndOf="@+id/linearLayout5">
 
                     <TextView
+                        android:id="@+id/totalProtectionCostTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="xxxxxxxxxxxxx" />
 
                     <TextView
+                        android:id="@+id/totalCountProtectionTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="xxxxxxxxxxxxx" />
@@ -338,9 +351,6 @@
                 </LinearLayout>
             </android.support.constraint.ConstraintLayout>
         </android.support.v7.widget.CardView>
-
-
-
 
     </LinearLayout>
     </ScrollView>
