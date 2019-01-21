@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".AddFuelActivity"
+    tools:context=".addActivities.AddFuelActivity"
     tools:showIn="@layout/activity_add_fuel"
     style="@style/StartLinearLayout">
 

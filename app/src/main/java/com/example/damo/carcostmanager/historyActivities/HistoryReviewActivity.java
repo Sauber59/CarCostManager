@@ -1,4 +1,4 @@
-package com.example.damo.carcostmanager;
+package com.example.damo.carcostmanager.historyActivities;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -7,12 +7,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-public class HistoryProtectionActivity extends AppCompatActivity {
+import com.example.damo.carcostmanager.R;
+
+public class HistoryReviewActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_history_protection);
+        setContentView(R.layout.activity_history_review);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 

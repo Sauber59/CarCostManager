@@ -1,4 +1,4 @@
-package com.example.damo.carcostmanager;
+package com.example.damo.carcostmanager.addActivities;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -7,12 +7,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-public class AddReviewActivity extends AppCompatActivity {
+import com.example.damo.carcostmanager.R;
+
+public class AddProtectionActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_review);
+        setContentView(R.layout.activity_add_protection);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 

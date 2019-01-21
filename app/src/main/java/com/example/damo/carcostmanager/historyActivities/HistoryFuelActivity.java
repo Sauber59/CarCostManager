@@ -1,4 +1,4 @@
-package com.example.damo.carcostmanager;
+package com.example.damo.carcostmanager.historyActivities;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -6,6 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.ListView;
 
+import com.example.damo.carcostmanager.CostList;
+import com.example.damo.carcostmanager.R;
+import com.example.damo.carcostmanager.classes.Cost;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;

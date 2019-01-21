@@ -1,4 +1,4 @@
-package com.example.damo.carcostmanager;
+package com.example.damo.carcostmanager.addActivities;
 
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
@@ -16,6 +16,9 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.damo.carcostmanager.MenuActivity;
+import com.example.damo.carcostmanager.R;
+import com.example.damo.carcostmanager.classes.Cost;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -30,8 +33,6 @@ import java.util.Date;
 
 public class AddFuelActivity extends AppCompatActivity {
 
-    private FirebaseAuth firebaseAuth;
-
     private EditText dataFuetET;
     private EditText quantityFuelET;
     private EditText costFuelET;
@@ -43,6 +44,7 @@ public class AddFuelActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
 
     private DatabaseReference databaseCosts;
+    private FirebaseAuth firebaseAuth;
 
     private DatePickerDialog.OnDateSetListener mDateListener;
     Calendar cal = Calendar.getInstance();
@@ -68,7 +70,6 @@ public class AddFuelActivity extends AppCompatActivity {
         progressDialog = new ProgressDialog(this);
 
         firebaseAuth = FirebaseAuth.getInstance();
-
         databaseCosts = FirebaseDatabase.getInstance().getReference("Costs");
 
         dataFuetET.setText(formattedDate);
@@ -144,6 +145,4 @@ public class AddFuelActivity extends AppCompatActivity {
                 break;
         }
     }
-
-
 }

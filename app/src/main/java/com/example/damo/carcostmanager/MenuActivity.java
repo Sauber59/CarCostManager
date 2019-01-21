@@ -9,6 +9,16 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.damo.carcostmanager.addActivities.AddFuelActivity;
+import com.example.damo.carcostmanager.addActivities.AddProtectionActivity;
+import com.example.damo.carcostmanager.addActivities.AddReviewActivity;
+import com.example.damo.carcostmanager.addActivities.AddServiceActivity;
+import com.example.damo.carcostmanager.classes.Car;
+import com.example.damo.carcostmanager.classes.Cost;
+import com.example.damo.carcostmanager.historyActivities.HistoryFuelActivity;
+import com.example.damo.carcostmanager.historyActivities.HistoryProtectionActivity;
+import com.example.damo.carcostmanager.historyActivities.HistoryReviewActivity;
+import com.example.damo.carcostmanager.historyActivities.HistoryServiceActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -18,7 +28,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class MenuActivity extends AppCompatActivity {
