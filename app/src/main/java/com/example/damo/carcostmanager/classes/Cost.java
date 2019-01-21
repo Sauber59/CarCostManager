@@ -20,6 +20,12 @@ public class Cost {
         this.distance = distance;
     }
 
+    public Cost(String data, float cost, float distance) {
+        this.data = data;
+        this.cost = cost;
+        this.distance = distance;
+    }
+
     public String getIdCost() {
         return idCost;
     }
