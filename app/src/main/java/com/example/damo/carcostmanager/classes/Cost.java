@@ -26,6 +26,11 @@ public class Cost {
         this.distance = distance;
     }
 
+    public Cost(String data, float cost) {
+        this.data = data;
+        this.cost = cost;
+    }
+
     public String getIdCost() {
         return idCost;
     }
