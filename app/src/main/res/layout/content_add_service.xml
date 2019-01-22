@@ -89,13 +89,13 @@
         android:layout_height="wrap_content">
 
         <Button
-            android:id="@+id/fuelCancelBtn"
+            android:id="@+id/serviceCancelBtn"
             style="@style/addCardBtn"
             android:text="Anuluj"
             android:onClick="click"/>
 
         <Button
-            android:id="@+id/fuelSaveBtn"
+            android:id="@+id/serviceSaveBtn"
             android:onClick="click"
             style="@style/addCardBtn"
             android:text="Zapisz" />

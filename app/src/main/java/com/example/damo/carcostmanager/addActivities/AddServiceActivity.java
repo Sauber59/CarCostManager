@@ -31,21 +31,14 @@ import java.util.Date;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class AddServiceActivity extends AppCompatActivity {
 
-    @BindView(R.id.dataServiceET)
     EditText dataServiceET;
-    @BindView(R.id.costServiceET)
     EditText costServiceET;
-    @BindView(R.id.distanceServiceET)
     EditText distanceServiceET;
-    @BindView(R.id.fuelCancelBtn)
-    Button fuelCancelBtn;
-    @BindView(R.id.fuelSaveBtn)
-    Button fuelSaveBtn;
+    Button serviceCancelBtn;
+    Button serviceSaveBtn;
 
     private ProgressDialog progressDialog;
 
@@ -62,9 +55,15 @@ public class AddServiceActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_service);
-        ButterKnife.bind(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        dataServiceET = (EditText) findViewById(R.id.dataServiceET);
+        costServiceET = (EditText) findViewById(R.id.costServiceET);
+        distanceServiceET = (EditText) findViewById(R.id.distanceServiceET);
+
+        serviceCancelBtn = (Button) findViewById(R.id.serviceCancelBtn);
+        serviceSaveBtn = (Button) findViewById(R.id.serviceSaveBtn);
 
         progressDialog = new ProgressDialog(this);
 
@@ -114,16 +113,16 @@ public class AddServiceActivity extends AppCompatActivity {
 
     public void click(View view) {
         switch (view.getId()){
-            case (R.id.fuelSaveBtn):
+            case (R.id.serviceSaveBtn):
                  sendServiceInformation();
                 break;
 
-            case (R.id.fuelCancelBtn):
+            case (R.id.serviceCancelBtn):
                 finish();
                 startActivity(new Intent(AddServiceActivity.this, MenuActivity.class));
                 break;
 
-            case (R.id.dataFuelET):
+            case (R.id.dataServiceET):
                 int year = cal.get(Calendar.YEAR);
                 int month = cal.get(Calendar.MONTH);
                 int day = cal.get(Calendar.DAY_OF_MONTH);
