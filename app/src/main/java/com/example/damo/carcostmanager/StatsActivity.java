@@ -19,6 +19,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class StatsActivity extends AppCompatActivity {
 
@@ -61,6 +62,9 @@ public class StatsActivity extends AppCompatActivity {
     float reviewCost;
     float protectionCost;
 
+    int numberOfDatabaseRequest = 4;
+    AtomicInteger currentNumberOfDatabaseRequest;//zmienna weryfikująca kiedy ostatni listener pobieania danych z bazy się zakończy
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,17 +100,18 @@ public class StatsActivity extends AppCompatActivity {
         reviewList = new ArrayList<>();
         protectionList = new ArrayList<>();
 
-
     }
 
     @Override
     protected void onStart() {
         super.onStart();
 
+        currentNumberOfDatabaseRequest = new AtomicInteger(0);
+
         databaseCosts.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.hasChildren()) {
+
                     costList.clear();
 
                     for (DataSnapshot costSnapshot : dataSnapshot.getChildren()) {
@@ -118,8 +123,9 @@ public class StatsActivity extends AppCompatActivity {
                         fuelCost = fuelCost + cost.getCost();
 
                     }
+                onDatabaseResult();
                 }
-            }
+
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -132,7 +138,7 @@ public class StatsActivity extends AppCompatActivity {
         databaseServices.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.hasChildren()) {
+
                     serivceList.clear();
 
                     for (DataSnapshot costSnapshot : dataSnapshot.getChildren()) {
@@ -144,8 +150,9 @@ public class StatsActivity extends AppCompatActivity {
                         seriveceCost = seriveceCost + cost.getCost();
 
                     }
+                onDatabaseResult();
                 }
-            }
+
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -157,7 +164,7 @@ public class StatsActivity extends AppCompatActivity {
         databaseReviews.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.hasChildren()) {
+
                     reviewList.clear();
 
                     for (DataSnapshot costSnapshot : dataSnapshot.getChildren()) {
@@ -169,8 +176,9 @@ public class StatsActivity extends AppCompatActivity {
                         reviewCost = reviewCost+ cost.getCost();
 
                     }
-                }
-            }
+                onDatabaseResult();
+        }
+
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -182,7 +190,7 @@ public class StatsActivity extends AppCompatActivity {
         databaseProtections.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.hasChildren()) {
+
                     protectionList.clear();
 
                     for (DataSnapshot costSnapshot : dataSnapshot.getChildren()) {
@@ -193,8 +201,9 @@ public class StatsActivity extends AppCompatActivity {
                         protectionQuantity++;
                         protectionCost = protectionCost+ cost.getCost();
                     }
+                onDatabaseResult();
                 }
-            }
+
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -202,29 +211,37 @@ public class StatsActivity extends AppCompatActivity {
 
             }
         });
-
-        distanse = calculateDistance(costList);
-        averageFuelConsumption = calculateAverageFuelConsumption(costList);
-        kilometerCost = calculateKilometerCost(costList, fuelCost);
-
-        totalCostTV.setText(Float.toString(calculateAllCostSUM(fuelCost, seriveceCost, reviewCost, protectionCost)) + " km");
-        totalDistanceTV.setText(Float.toString(distanse) + " km");
-
-        totalFuelCostTV.setText(Float.toString(fuelCost) + " zł");
-        totalFuelQuantityTV.setText(Integer.toString(fuelQuantity) + " tankowań");
-        totalAverageFuelConsumptionTV.setText(Float.toString(fuelQuantity) + " l");
-
-        totalServiceCostTV.setText(Float.toString(seriveceCost) + " zł");
-        totalCountServiceTV.setText(Integer.toString(serviceQuantity) + " serwisów");
-
-        totalReviewCostTV.setText(Float.toString(reviewCost) + " zł");
-        totalQuantityReviewTV.setText(Integer.toString(reviewQuantity) + " przeglądów");
-
-        totalProtectionCostTV.setText(Float.toString(protectionCost) + " zł");
-        totalCountProtectionTV.setText(Integer.toString(protectionQuantity) + " serwisów");
-
-
     }
+
+
+
+     public void onDatabaseResult() {
+
+        if (currentNumberOfDatabaseRequest.incrementAndGet() == numberOfDatabaseRequest) {
+
+            distanse = calculateDistance(costList);
+            averageFuelConsumption = calculateAverageFuelConsumption(costList);
+            kilometerCost = calculateKilometerCost(costList, fuelCost);
+
+            totalCostTV.setText(Float.toString(calculateAllCostSUM(fuelCost, seriveceCost, reviewCost, protectionCost)) + " km");
+            totalDistanceTV.setText(Float.toString(distanse) + " km");
+            kilometerCostTV.setText(Float.toString(kilometerCost) + " zł");
+
+            totalFuelCostTV.setText(Float.toString(fuelCost) + " zł");
+            totalFuelQuantityTV.setText(Integer.toString(fuelQuantity) + " tankowań");
+            totalAverageFuelConsumptionTV.setText(Float.toString(fuelQuantity) + " l");
+
+            totalServiceCostTV.setText(Float.toString(seriveceCost) + " zł");
+            totalCountServiceTV.setText(Integer.toString(serviceQuantity) + " serwisów");
+
+            totalReviewCostTV.setText(Float.toString(reviewCost) + " zł");
+            totalQuantityReviewTV.setText(Integer.toString(reviewQuantity) + " przeglądów");
+
+            totalProtectionCostTV.setText(Float.toString(protectionCost) + " zł");
+            totalCountProtectionTV.setText(Integer.toString(protectionQuantity) + " serwisów");
+        }
+    }
+
 
     public float calculateDistance(List<Cost> costList) {
         float distance = 0;
