@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.damo.carcostmanager.classes.Cost;
 import com.google.firebase.auth.FirebaseAuth;
@@ -36,14 +37,30 @@ public class StatsActivity extends AppCompatActivity {
     TextView totalCountProtectionTV;
 
     private DatabaseReference databaseCosts;
+    private DatabaseReference databaseServices;
+    private DatabaseReference databaseReviews;
+    private DatabaseReference databaseProtections;
     private FirebaseAuth firebaseAuth;
 
     List<Cost> costList;
-    int fuelQuantity = 0;
+    List<Cost> serivceList;
+    List<Cost> reviewList;
+    List<Cost> protectionList;
+
+    int fuelQuantity;
+    int serviceQuantity;
+    int reviewQuantity;
+    int protectionQuantity;
+
     float fuelCost;
     float averageFuelConsumption;
     float distanse;
     float kilometerCost;
+
+    float seriveceCost;
+    float reviewCost;
+    float protectionCost;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,8 +87,16 @@ public class StatsActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
         databaseCosts = FirebaseDatabase.getInstance().getReference("Costs/" + user.getUid().toString());
+        databaseServices = FirebaseDatabase.getInstance().getReference("Services/" + user.getUid().toString());
+        databaseReviews = FirebaseDatabase.getInstance().getReference("Rewievs/" + user.getUid().toString());
+        databaseProtections = FirebaseDatabase.getInstance().getReference("Protections/" + user.getUid().toString());
 
         costList = new ArrayList<>();
+        serivceList = new ArrayList<>();
+        reviewList = new ArrayList<>();
+        protectionList = new ArrayList<>();
+
+
     }
 
     @Override
@@ -93,23 +118,112 @@ public class StatsActivity extends AppCompatActivity {
                         fuelCost = fuelCost + cost.getCost();
 
                     }
-                    distanse = calculateDistance(costList);
-                    averageFuelConsumption = calculateAverageFuelConsumption(costList);
-                    kilometerCost = calculateKilometerCost(costList, fuelCost);
-
-                    totalDistanceTV.setText(Float.toString(distanse) + " km");
-
-                    totalFuelCostTV.setText(Float.toString(fuelCost) + " zł");
-                    totalFuelQuantityTV.setText(Integer.toString(fuelQuantity) + " tankowań");
-                    totalAverageFuelConsumptionTV.setText(Float.toString(fuelQuantity) + " l");
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
+                Toast.makeText(StatsActivity.this, "onStart, databaseCosts error", Toast.LENGTH_LONG).show();
+
             }
         });
+
+        databaseServices.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.hasChildren()) {
+                    serivceList.clear();
+
+                    for (DataSnapshot costSnapshot : dataSnapshot.getChildren()) {
+                        Cost cost = costSnapshot.getValue(Cost.class);
+
+                        serivceList.add(cost);
+
+                        serviceQuantity++;
+                        seriveceCost = seriveceCost + cost.getCost();
+
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(StatsActivity.this, "onStart, databaseServices error", Toast.LENGTH_LONG).show();
+
+            }
+        });
+
+        databaseReviews.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.hasChildren()) {
+                    reviewList.clear();
+
+                    for (DataSnapshot costSnapshot : dataSnapshot.getChildren()) {
+                        Cost cost = costSnapshot.getValue(Cost.class);
+
+                        reviewList.add(cost);
+
+                        reviewQuantity++;
+                        reviewCost = reviewCost+ cost.getCost();
+
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(StatsActivity.this, "onStart, databaseReviews error", Toast.LENGTH_LONG).show();
+
+            }
+        });
+
+        databaseProtections.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.hasChildren()) {
+                    protectionList.clear();
+
+                    for (DataSnapshot costSnapshot : dataSnapshot.getChildren()) {
+                        Cost cost = costSnapshot.getValue(Cost.class);
+
+                        protectionList.add(cost);
+
+                        protectionQuantity++;
+                        protectionCost = protectionCost+ cost.getCost();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(StatsActivity.this, "onStart, databaseProtections error", Toast.LENGTH_LONG).show();
+
+            }
+        });
+
+        distanse = calculateDistance(costList);
+        averageFuelConsumption = calculateAverageFuelConsumption(costList);
+        kilometerCost = calculateKilometerCost(costList, fuelCost);
+
+        totalCostTV.setText(Float.toString(calculateAllCostSUM(fuelCost, seriveceCost, reviewCost, protectionCost)) + " km");
+        totalDistanceTV.setText(Float.toString(distanse) + " km");
+
+        totalFuelCostTV.setText(Float.toString(fuelCost) + " zł");
+        totalFuelQuantityTV.setText(Integer.toString(fuelQuantity) + " tankowań");
+        totalAverageFuelConsumptionTV.setText(Float.toString(fuelQuantity) + " l");
+
+        totalServiceCostTV.setText(Float.toString(seriveceCost) + " zł");
+        totalCountServiceTV.setText(Integer.toString(serviceQuantity) + " serwisów");
+
+        totalReviewCostTV.setText(Float.toString(reviewCost) + " zł");
+        totalQuantityReviewTV.setText(Integer.toString(reviewQuantity) + " przeglądów");
+
+        totalProtectionCostTV.setText(Float.toString(protectionCost) + " zł");
+        totalCountProtectionTV.setText(Integer.toString(protectionQuantity) + " serwisów");
+
+
     }
 
     public float calculateDistance(List<Cost> costList) {
@@ -141,16 +255,19 @@ public class StatsActivity extends AppCompatActivity {
             float beginDistance = costList.get(0).getDistance();
             float endDistance = costList.get(costList.size() - 1).getDistance();
 
-                for (int i = 1; i < costList.size(); i++) {
-                    if (costList.get(i).getDistance() < beginDistance)
-                        beginDistance = costList.get(i).getDistance();
+            for (int i = 1; i < costList.size(); i++) {
+                if (costList.get(i).getDistance() < beginDistance)
+                    beginDistance = costList.get(i).getDistance();
 
-                    if (costList.get(i).getDistance() > endDistance)
-                        endDistance = costList.get(i).getDistance();
-                }
-                kilometerCost = fuelCost / (endDistance - beginDistance);
+                if (costList.get(i).getDistance() > endDistance)
+                    endDistance = costList.get(i).getDistance();
             }
-            return kilometerCost;
+            kilometerCost = fuelCost / (endDistance - beginDistance);
         }
+        return kilometerCost;
+    }
+    public float calculateAllCostSUM(float a, float b, float c, float d) {
+        return a + b + c + d;
+    }
     }
 
