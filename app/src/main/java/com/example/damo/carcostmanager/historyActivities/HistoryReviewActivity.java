@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.damo.carcostmanager.Adapters.CostList;
+import com.example.damo.carcostmanager.Adapters.CostShortAdpater;
 import com.example.damo.carcostmanager.R;
 import com.example.damo.carcostmanager.classes.Cost;
 import com.google.firebase.auth.FirebaseAuth;
@@ -43,7 +44,7 @@ public class HistoryReviewActivity extends AppCompatActivity {
         String databaseRef = "Reviews/" + user.getUid().toString();
         database = FirebaseDatabase.getInstance().getReference(databaseRef);
 
-        listViewServices = (ListView) findViewById(R.id.listViewServiceCosts);
+        listViewServices = (ListView) findViewById(R.id.listViewReviewCosts);
 
         costShortLists = new ArrayList<>();
 
@@ -68,7 +69,7 @@ public class HistoryReviewActivity extends AppCompatActivity {
 
 
                 Collections.reverse(costShortLists);  //odwrócenie kolejności
-                CostList adapter = new CostList(HistoryReviewActivity.this, costShortLists);
+                CostShortAdpater adapter = new CostShortAdpater(HistoryReviewActivity.this, costShortLists);
                 listViewServices.setAdapter(adapter);
             }
 

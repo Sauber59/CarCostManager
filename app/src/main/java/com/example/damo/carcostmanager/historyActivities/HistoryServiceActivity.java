@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.damo.carcostmanager.Adapters.CostList;
+import com.example.damo.carcostmanager.Adapters.CostShortAdpater;
 import com.example.damo.carcostmanager.R;
 import com.example.damo.carcostmanager.classes.Cost;
 import com.google.firebase.auth.FirebaseAuth;
@@ -69,7 +70,7 @@ public class HistoryServiceActivity extends AppCompatActivity {
 
 
                 Collections.reverse(costShortLists);  //odwrócenie kolejności
-                CostList adapter = new CostList(HistoryServiceActivity.this, costShortLists);
+                CostShortAdpater adapter = new CostShortAdpater(HistoryServiceActivity.this, costShortLists);
                 listViewServices.setAdapter(adapter);
             }
 

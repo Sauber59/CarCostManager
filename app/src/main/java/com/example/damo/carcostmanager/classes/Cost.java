@@ -30,7 +30,8 @@ public class Cost {
         this.distance = distance;
     }
 
-    public Cost(String data, float cost, float distance) {
+    public Cost(String idCost, String data, float cost, float distance) {
+        this.idCost = idCost;
         this.data = data;
         this.cost = cost;
         this.distance = distance;
@@ -41,7 +42,8 @@ public class Cost {
         this.cost = cost;
     }
 
-    public Cost(String data, float cost, String comments) {
+    public Cost(String idCost, String data, float cost, String comments) {
+        this.idCost = idCost;
         this.data = data;
         this.cost = cost;
         this.comments = comments;

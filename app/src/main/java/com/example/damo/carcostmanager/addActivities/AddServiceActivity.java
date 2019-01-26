@@ -36,7 +36,7 @@ public class AddServiceActivity extends AppCompatActivity {
 
     EditText dataServiceET;
     EditText costServiceET;
-    EditText distanceServiceET;
+    EditText commentServiceET;
     Button serviceCancelBtn;
     Button serviceSaveBtn;
 
@@ -60,7 +60,7 @@ public class AddServiceActivity extends AppCompatActivity {
 
         dataServiceET = (EditText) findViewById(R.id.dataServiceET);
         costServiceET = (EditText) findViewById(R.id.costServiceET);
-        distanceServiceET = (EditText) findViewById(R.id.distanceServiceET);
+        commentServiceET = (EditText) findViewById(R.id.commentServiceET);
 
         serviceCancelBtn = (Button) findViewById(R.id.serviceCancelBtn);
         serviceSaveBtn = (Button) findViewById(R.id.serviceSaveBtn);
@@ -72,18 +72,15 @@ public class AddServiceActivity extends AppCompatActivity {
 
         dataServiceET.setText(formattedDate);
 
-        //// TODO: 21.01.2019 zastanow sie nad dodaniem opisu dla seriwsu 
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     private void sendServiceInformation(){
         String data = dataServiceET.getText().toString().trim();
         float cost = Float.parseFloat(costServiceET.getText().toString().trim());
-        float distance = Float.parseFloat(distanceServiceET.getText().toString().trim());
+        String comment =commentServiceET.getText().toString().trim();
 
-        if (TextUtils.isEmpty(data) || TextUtils.isEmpty(costServiceET.getText())
-                || TextUtils.isEmpty(distanceServiceET.getText())){
+        if (TextUtils.isEmpty(data) || TextUtils.isEmpty(costServiceET.getText())){
             Toast.makeText(this, "Uzupełnij wszystkie dane!", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -92,7 +89,7 @@ public class AddServiceActivity extends AppCompatActivity {
         progressDialog.show();
 
         String id = databaseServices.push().getKey();
-        Cost servicesInformation = new Cost(data,cost,distance);
+        Cost servicesInformation = new Cost(id,data,cost,comment);
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
         databaseServices.child(user.getUid()).child(id).setValue(servicesInformation).addOnCompleteListener(new OnCompleteListener<Void>() {

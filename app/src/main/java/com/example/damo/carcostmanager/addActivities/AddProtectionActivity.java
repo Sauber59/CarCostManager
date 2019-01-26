@@ -77,6 +77,7 @@ public class AddProtectionActivity extends AppCompatActivity {
 
     private void sendProtectionInformation(){
         String data = dataProtectionET.getText().toString().trim();
+
         float cost = Float.parseFloat(costProtectionET.getText().toString().trim());
         String comment = commentProtectionET.getText().toString().trim();
 
@@ -89,7 +90,7 @@ public class AddProtectionActivity extends AppCompatActivity {
         progressDialog.show();
 
         String id = databaseProtections.push().getKey();
-        Cost protectionInformation = new Cost(data,cost,comment);
+        Cost protectionInformation = new Cost(id, data,cost,comment);
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
         databaseProtections.child(user.getUid()).child(id).setValue(protectionInformation).addOnCompleteListener(new OnCompleteListener<Void>() {

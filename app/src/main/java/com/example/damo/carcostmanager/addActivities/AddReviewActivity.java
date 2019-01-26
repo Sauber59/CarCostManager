@@ -36,7 +36,7 @@ public class AddReviewActivity extends AppCompatActivity {
 
     EditText dataReviewET;
     EditText costReviewET;
-    EditText distanceReviewET;
+    EditText commenReviewET;
     Button reviewCancelBtn;
     Button reviewSaveBtn;
 
@@ -60,7 +60,7 @@ public class AddReviewActivity extends AppCompatActivity {
 
         dataReviewET = (EditText) findViewById(R.id.dataReviewET);
         costReviewET = (EditText) findViewById(R.id.costReviewET);
-        distanceReviewET = (EditText) findViewById(R.id.distanceReviewET);
+        commenReviewET = (EditText) findViewById(R.id.commenReviewET);
 
         reviewCancelBtn = (Button) findViewById(R.id.reviewCancelBtn);
         reviewSaveBtn = (Button) findViewById(R.id.reviewSaveBtn);
@@ -78,10 +78,9 @@ public class AddReviewActivity extends AppCompatActivity {
     private void sendReviewInformation(){
         String data = dataReviewET.getText().toString().trim();
         float cost = Float.parseFloat(costReviewET.getText().toString().trim());
-        float distance = Float.parseFloat(distanceReviewET.getText().toString().trim());
+        String comment = commenReviewET.getText().toString().trim();
 
-        if (TextUtils.isEmpty(data) || TextUtils.isEmpty(costReviewET.getText())
-                || TextUtils.isEmpty(distanceReviewET.getText())){
+        if (TextUtils.isEmpty(data) || TextUtils.isEmpty(costReviewET.getText())){
             Toast.makeText(this, "Uzupełnij wszystkie dane!", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -90,7 +89,7 @@ public class AddReviewActivity extends AppCompatActivity {
         progressDialog.show();
 
         String id = databaseReviews.push().getKey();
-        Cost servicesInformation = new Cost(data,cost,distance);
+        Cost servicesInformation = new Cost(id, data,cost,comment);
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
         databaseReviews.child(user.getUid()).child(id).setValue(servicesInformation).addOnCompleteListener(new OnCompleteListener<Void>() {

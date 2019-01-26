@@ -45,7 +45,7 @@
 
                 <TextView
                     style="@style/addCardTextView"
-                    android:text="Przebieg" />
+                    android:text="Opis" />
 
 
             </LinearLayout>
@@ -71,11 +71,11 @@
                     android:hint="zł" />
 
                 <EditText
-                    android:inputType="number"
-                    android:id="@+id/distanceReviewET"
+                    android:inputType="text"
+                    android:id="@+id/commenReviewET"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="km" />
+                    android:hint="Opis"/>
 
             </LinearLayout>
         </LinearLayout>

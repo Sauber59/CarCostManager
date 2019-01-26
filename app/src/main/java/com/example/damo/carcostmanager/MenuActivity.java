@@ -8,6 +8,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.damo.carcostmanager.addActivities.AddFuelActivity;
 import com.example.damo.carcostmanager.addActivities.AddProtectionActivity;
@@ -41,15 +42,11 @@ public class MenuActivity extends AppCompatActivity {
     TextView fuelQuantityTV;
     TextView fuelConsumptionTV;
 
-    /*TextView fuelCostTV;
-    TextView fuelDistanceTV;
-    TextView fuelQuantityTV;
-    TextView fuelConsumptionTV;
+    TextView serviceDateTV;
+    TextView serviceCostTV;
 
-    TextView fuelCostTV;
-    TextView fuelDistanceTV;
-    TextView fuelQuantityTV;
-    TextView fuelConsumptionTV;*/
+    TextView reviewCostTV;
+    TextView reviewDateTV;
 
     TextView protectionCostTV;
     TextView protectionDateTV;
@@ -73,6 +70,10 @@ public class MenuActivity extends AppCompatActivity {
 
     Car carInfo;
 
+    //DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,6 +91,13 @@ public class MenuActivity extends AppCompatActivity {
         fuelConsumptionTV= (TextView) findViewById(R.id.fuelConsumptionTV);
         fuelQuantityTV= (TextView) findViewById(R.id.fuelQuantityTV);
 
+
+        serviceCostTV= (TextView) findViewById(R.id.serviceCostTV);
+        serviceDateTV= (TextView) findViewById(R.id.serviceDateTV);
+
+        reviewCostTV= (TextView) findViewById(R.id.reviewCostTV);
+        reviewDateTV= (TextView) findViewById(R.id.reviewDateTV);
+
         protectionCostTV= (TextView) findViewById(R.id.protectionCostTV);
         protectionDateTV= (TextView) findViewById(R.id.protectionDateTV);
 
@@ -97,9 +105,9 @@ public class MenuActivity extends AppCompatActivity {
         FirebaseUser user = firebaseAuth.getCurrentUser();
         databaseCosts = FirebaseDatabase.getInstance().getReference("Costs/" + user.getUid().toString());
         databaseCar = FirebaseDatabase.getInstance().getReference("Car/");
-        databaseProtections = FirebaseDatabase.getInstance().getReference("Protections/");
-        databaseReviews = FirebaseDatabase.getInstance().getReference("Reviews/");
-        databaseServices = FirebaseDatabase.getInstance().getReference("Services/");
+        databaseProtections = FirebaseDatabase.getInstance().getReference("Protections/" + user.getUid().toString());
+        databaseReviews = FirebaseDatabase.getInstance().getReference("Reviews/" + user.getUid().toString());
+        databaseServices = FirebaseDatabase.getInstance().getReference("Services/" + user.getUid().toString());
 
         costList = new ArrayList<>();
         protectionList = new ArrayList<>();
@@ -128,12 +136,11 @@ public class MenuActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
             }
         });
 
         //pobieranie odstatniego tankowania
-        databaseCosts.addValueEventListener(new ValueEventListener() {
+       databaseCosts.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.hasChildren()) {
@@ -157,6 +164,62 @@ public class MenuActivity extends AppCompatActivity {
                         fuelDistanceTV.setText(Float.toString(distance) + " km");
                         fuelConsumptionTV.setText(Float.toString(lastFuel.getQuantity() / distance * 100) + " l");
                     }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        //pobieranie odstatniego serwisu
+        databaseServices.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.hasChildren()) {
+
+                    for (DataSnapshot costSnapshot : dataSnapshot.getChildren()) {
+                        Cost cost = costSnapshot.getValue(Cost.class);
+
+                        servicesList.add(cost);
+
+                    }
+
+                    if (servicesList.size() > 0) {
+                        lastService = servicesList.get(servicesList.size() - 1);
+                        serviceCostTV.setText(Float.toString(lastService.getCost()) + " zł");
+                        serviceDateTV.setText(lastService.getData());
+                    }
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        //pobieranie odstatniego przegladu
+        databaseReviews.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.hasChildren()) {
+
+                    for (DataSnapshot costSnapshot : dataSnapshot.getChildren()) {
+                        Cost cost = costSnapshot.getValue(Cost.class);
+
+                        reviewsList.add(cost);
+
+                    }
+
+                    if (reviewsList.size() > 0) {
+                        lastReview = reviewsList.get(reviewsList.size() - 1);
+                        reviewCostTV.setText(Float.toString(lastReview.getCost()) + " zł");
+                        reviewDateTV.setText(lastReview.getData());
+                    }
+
                 }
             }
 
@@ -194,7 +257,6 @@ public class MenuActivity extends AppCompatActivity {
         });
 
 }
-
 
     public void click(View view) {
         LinearLayout extraContainer = null;
