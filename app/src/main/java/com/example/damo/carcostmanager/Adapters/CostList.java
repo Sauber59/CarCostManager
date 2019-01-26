@@ -1,4 +1,4 @@
-package com.example.damo.carcostmanager;
+package com.example.damo.carcostmanager.Adapters;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.example.damo.carcostmanager.R;
 import com.example.damo.carcostmanager.classes.Cost;
 
 import java.util.List;

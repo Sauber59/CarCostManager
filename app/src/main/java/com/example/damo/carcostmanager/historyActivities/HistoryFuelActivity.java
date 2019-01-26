@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import android.widget.ListView;
 
-import com.example.damo.carcostmanager.CostList;
+import com.example.damo.carcostmanager.Adapters.CostList;
 import com.example.damo.carcostmanager.R;
 import com.example.damo.carcostmanager.classes.Cost;
 import com.google.firebase.auth.FirebaseAuth;

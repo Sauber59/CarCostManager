@@ -7,9 +7,19 @@ public class Cost {
     private float cost;
     private float quantity;
     private float distance;
+    private String comments;
 
     public Cost(){
 
+    }
+
+    public Cost(String idCost, String data, float cost, float quantity, float distance, String comments) {
+        this.idCost = idCost;
+        this.data = data;
+        this.cost = cost;
+        this.quantity = quantity;
+        this.distance = distance;
+        this.comments = comments;
     }
 
     public Cost(String idCost, String data, float cost, float quantity, float distance) {
@@ -29,6 +39,20 @@ public class Cost {
     public Cost(String data, float cost) {
         this.data = data;
         this.cost = cost;
+    }
+
+    public Cost(String data, float cost, String comments) {
+        this.data = data;
+        this.cost = cost;
+        this.comments = comments;
+    }
+
+    public String getComments() {
+        return comments;
+    }
+
+    public void setComments(String comments) {
+        this.comments = comments;
     }
 
     public String getIdCost() {

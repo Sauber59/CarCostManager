@@ -8,4 +8,11 @@
     tools:context=".historyActivities.HistoryProtectionActivity"
     tools:showIn="@layout/activity_history_protection">
 
+
+    <ListView
+        android:id="@+id/listViewProtectionCosts"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="5dp"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

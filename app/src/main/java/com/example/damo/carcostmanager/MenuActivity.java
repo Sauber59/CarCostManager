@@ -41,12 +41,34 @@ public class MenuActivity extends AppCompatActivity {
     TextView fuelQuantityTV;
     TextView fuelConsumptionTV;
 
+    /*TextView fuelCostTV;
+    TextView fuelDistanceTV;
+    TextView fuelQuantityTV;
+    TextView fuelConsumptionTV;
+
+    TextView fuelCostTV;
+    TextView fuelDistanceTV;
+    TextView fuelQuantityTV;
+    TextView fuelConsumptionTV;*/
+
+    TextView protectionCostTV;
+    TextView protectionDateTV;
+
     private DatabaseReference databaseCosts;
     private DatabaseReference databaseCar;
+    private DatabaseReference databaseServices;
+    private DatabaseReference databaseProtections;
+    private DatabaseReference databaseReviews;
     private FirebaseAuth firebaseAuth;
 
     List<Cost> costList;
+    List<Cost> protectionList;
+    List<Cost> servicesList;
+    List<Cost> reviewsList;
     Cost lastFuel;
+    Cost lastService;
+    Cost lastProtection;
+    Cost lastReview;
     Cost beforeLastFuel;
 
     Car carInfo;
@@ -68,18 +90,28 @@ public class MenuActivity extends AppCompatActivity {
         fuelConsumptionTV= (TextView) findViewById(R.id.fuelConsumptionTV);
         fuelQuantityTV= (TextView) findViewById(R.id.fuelQuantityTV);
 
+        protectionCostTV= (TextView) findViewById(R.id.protectionCostTV);
+        protectionDateTV= (TextView) findViewById(R.id.protectionDateTV);
+
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
         databaseCosts = FirebaseDatabase.getInstance().getReference("Costs/" + user.getUid().toString());
         databaseCar = FirebaseDatabase.getInstance().getReference("Car/");
+        databaseProtections = FirebaseDatabase.getInstance().getReference("Protections/");
+        databaseReviews = FirebaseDatabase.getInstance().getReference("Reviews/");
+        databaseServices = FirebaseDatabase.getInstance().getReference("Services/");
 
         costList = new ArrayList<>();
+        protectionList = new ArrayList<>();
+        reviewsList= new ArrayList<>();
+        servicesList= new ArrayList<>();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
 
+        //pobieranie inf o pojezdzie
         databaseCar.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -100,6 +132,7 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
 
+        //pobieranie odstatniego tankowania
         databaseCosts.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -132,13 +165,36 @@ public class MenuActivity extends AppCompatActivity {
 
             }
         });
+
+        //pobieranie odstatniego ubezpieczenia
+        databaseProtections.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.hasChildren()) {
+                    protectionList.clear();
+
+                    for (DataSnapshot costSnapshot : dataSnapshot.getChildren()) {
+                        Cost protection = costSnapshot.getValue(Cost.class);
+
+                        protectionList.add(protection);
+                    }
+
+                    if (protectionList.size() > 0) {
+                        lastProtection = protectionList.get(protectionList.size() - 1);
+                        protectionCostTV.setText(Float.toString(lastProtection.getCost()) + " zł");
+                        protectionDateTV.setText(lastProtection.getData());
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
 }
 
-
-
-    public int test(int a, int b){
-        return a+b;
-    }
 
     public void click(View view) {
         LinearLayout extraContainer = null;

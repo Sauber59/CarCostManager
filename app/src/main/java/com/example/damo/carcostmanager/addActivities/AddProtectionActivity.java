@@ -36,6 +36,7 @@ public class AddProtectionActivity extends AppCompatActivity {
 
     EditText dataProtectionET;
     EditText costProtectionET;
+    EditText commentProtectionET;
     Button protectionCancelBtn;
     Button protectionSaveBtn;
 
@@ -59,6 +60,7 @@ public class AddProtectionActivity extends AppCompatActivity {
 
         dataProtectionET = (EditText) findViewById(R.id.dataProtectionET);
         costProtectionET = (EditText) findViewById(R.id.costProtectionET);
+        commentProtectionET = (EditText) findViewById(R.id.commentProtectionET);
 
         protectionCancelBtn = (Button) findViewById(R.id.protectionCancelBtn);
         protectionSaveBtn = (Button) findViewById(R.id.protectionSaveBtn);
@@ -76,6 +78,7 @@ public class AddProtectionActivity extends AppCompatActivity {
     private void sendProtectionInformation(){
         String data = dataProtectionET.getText().toString().trim();
         float cost = Float.parseFloat(costProtectionET.getText().toString().trim());
+        String comment = commentProtectionET.getText().toString().trim();
 
         if (TextUtils.isEmpty(data) || TextUtils.isEmpty(costProtectionET.getText())){
             Toast.makeText(this, "Uzupełnij wszystkie dane!", Toast.LENGTH_SHORT).show();
@@ -86,10 +89,10 @@ public class AddProtectionActivity extends AppCompatActivity {
         progressDialog.show();
 
         String id = databaseProtections.push().getKey();
-        Cost servicesInformation = new Cost(data,cost);
+        Cost protectionInformation = new Cost(data,cost,comment);
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
-        databaseProtections.child(user.getUid()).child(id).setValue(servicesInformation).addOnCompleteListener(new OnCompleteListener<Void>() {
+        databaseProtections.child(user.getUid()).child(id).setValue(protectionInformation).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
 
