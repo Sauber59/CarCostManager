@@ -23,7 +23,7 @@
 
             <TextView
                 android:gravity="center"
-                android:text="CAłOŚĆ"
+                android:text="CAŁOŚĆ"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/CostTittleTextView"/>
@@ -41,6 +41,17 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="18dp"
+                        android:text="Przebieg początkowy:" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="18dp"
+                        android:text="Przebieg aktualny:" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -56,10 +67,6 @@
                         android:layout_height="wrap_content"
                         android:text="Całkowity koszt kilometra:" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="18dp"
-                        android:text="Średni koszt miesięczny:" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -68,6 +75,18 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     app:layout_constraintStart_toEndOf="@+id/linearLayout5">
+
+                    <TextView
+                        android:id="@+id/startDistanceTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="18dp"
+                        android:text="xxxxxxxxxxxxx" />
+
+                    <TextView
+                        android:id="@+id/endDistanceTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="18dp"
+                        android:text="xxxxxxxxxxxxx" />
 
                     <TextView
                         android:id="@+id/totalCostTV"
@@ -87,11 +106,7 @@
                         android:layout_height="wrap_content"
                         android:text="xxxxxxxxxxxxx" />
 
-                    <TextView
-                        android:id="@+id/averageKilometerCostTV"
-                        android:layout_width="wrap_content"
-                        android:layout_height="18dp"
-                        android:text="xxxxxxxxxxxxx" />
+
                 </LinearLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>

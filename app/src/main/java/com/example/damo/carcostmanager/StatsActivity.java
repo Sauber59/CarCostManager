@@ -26,7 +26,6 @@ public class StatsActivity extends AppCompatActivity {
     TextView totalCostTV;
     TextView totalDistanceTV;
     TextView kilometerCostTV;
-    TextView averageKilometerCostTV;
     TextView totalFuelQuantityTV;
     TextView totalFuelCostTV;
     TextView totalAverageFuelConsumptionTV;
@@ -36,6 +35,8 @@ public class StatsActivity extends AppCompatActivity {
     TextView totalQuantityReviewTV;
     TextView totalProtectionCostTV;
     TextView totalCountProtectionTV;
+    TextView startDistanceTV;
+    TextView endDistanceTV;
 
     private DatabaseReference databaseCosts;
     private DatabaseReference databaseServices;
@@ -62,6 +63,9 @@ public class StatsActivity extends AppCompatActivity {
     float reviewCost;
     float protectionCost;
 
+    float startDistance;
+    float endDistance;
+
     int numberOfDatabaseRequest = 4;
     AtomicInteger currentNumberOfDatabaseRequest;//zmienna weryfikująca kiedy ostatni listener pobieania danych z bazy się zakończy
 
@@ -77,7 +81,6 @@ public class StatsActivity extends AppCompatActivity {
         totalCostTV = (TextView)findViewById(R.id.totalCostTV);
         totalDistanceTV = (TextView)findViewById(R.id.totalDistanceTV);
         kilometerCostTV = (TextView)findViewById(R.id.kilometerCostTV);
-        averageKilometerCostTV = (TextView)findViewById(R.id.averageKilometerCostTV);
         totalFuelQuantityTV = (TextView)findViewById(R.id.totalFuelQuantityTV);
         totalFuelCostTV = (TextView)findViewById(R.id.totalFuelCostTV);
         totalAverageFuelConsumptionTV = (TextView)findViewById(R.id.totalAverageFuelConsumptionTV);
@@ -87,12 +90,14 @@ public class StatsActivity extends AppCompatActivity {
         totalQuantityReviewTV = (TextView)findViewById(R.id.totalQuantityReviewTV);
         totalProtectionCostTV = (TextView)findViewById(R.id.totalProtectionCostTV);
         totalCountProtectionTV = (TextView)findViewById(R.id.totalCountProtectionTV);
+        startDistanceTV = (TextView)findViewById(R.id.startDistanceTV);
+        endDistanceTV = (TextView)findViewById(R.id.endDistanceTV);
 
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
         databaseCosts = FirebaseDatabase.getInstance().getReference("Costs/" + user.getUid().toString());
         databaseServices = FirebaseDatabase.getInstance().getReference("Services/" + user.getUid().toString());
-        databaseReviews = FirebaseDatabase.getInstance().getReference("Rewievs/" + user.getUid().toString());
+        databaseReviews = FirebaseDatabase.getInstance().getReference("Reviews/" + user.getUid().toString());
         databaseProtections = FirebaseDatabase.getInstance().getReference("Protections/" + user.getUid().toString());
 
         costList = new ArrayList<>();
@@ -223,9 +228,11 @@ public class StatsActivity extends AppCompatActivity {
             averageFuelConsumption = calculateAverageFuelConsumption(costList);
             kilometerCost = calculateKilometerCost(costList, fuelCost);
 
-            totalCostTV.setText(Float.toString(calculateAllCostSUM(fuelCost, seriveceCost, reviewCost, protectionCost)) + " km");
+            totalCostTV.setText(Float.toString(calculateAllCostSUM(fuelCost, seriveceCost, reviewCost, protectionCost)) + " zł");
             totalDistanceTV.setText(Float.toString(distanse) + " km");
             kilometerCostTV.setText(Float.toString(kilometerCost) + " zł");
+            endDistanceTV.setText(Float.toString(costList.get(costList.size()-1).getDistance()) + " km");
+            startDistanceTV.setText(Float.toString(costList.get(0).getDistance()) + " km");
 
             totalFuelCostTV.setText(Float.toString(fuelCost) + " zł");
             totalFuelQuantityTV.setText(Integer.toString(fuelQuantity) + " tankowań");
@@ -238,17 +245,18 @@ public class StatsActivity extends AppCompatActivity {
             totalQuantityReviewTV.setText(Integer.toString(reviewQuantity) + " przeglądów");
 
             totalProtectionCostTV.setText(Float.toString(protectionCost) + " zł");
-            totalCountProtectionTV.setText(Integer.toString(protectionQuantity) + " serwisów");
+            totalCountProtectionTV.setText(Integer.toString(protectionQuantity) + " ubezpieczeń");
         }
     }
 
 
     public float calculateDistance(List<Cost> costList) {
         float distance = 0;
-        if (costList.size() > 2) {
-            distance = costList.get(costList.size()-1).getCost() - costList.get(0).getCost();
+        if (costList.size() >= 2) {
+            distance = costList.get(costList.size()-1).getDistance() - costList.get(0).getDistance();
         }
-            return distance;
+
+        return distance;
         }
 
     public float calculateAverageFuelConsumption(List<Cost> costList) {
