@@ -28,7 +28,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class MenuActivity extends AppCompatActivity {
@@ -70,7 +74,7 @@ public class MenuActivity extends AppCompatActivity {
 
     Car carInfo;
 
-    //DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
+    DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
 
 
@@ -217,7 +221,11 @@ public class MenuActivity extends AppCompatActivity {
                     if (reviewsList.size() > 0) {
                         lastReview = reviewsList.get(reviewsList.size() - 1);
                         reviewCostTV.setText(Float.toString(lastReview.getCost()) + " zł");
-                        reviewDateTV.setText(lastReview.getData());
+                        try {
+                            reviewDateTV.setText(addDate(lastReview.getData()));
+                        } catch (ParseException e) {
+                            displayExceptionMessage(e.getMessage());
+                        }
                     }
 
                 }
@@ -245,7 +253,14 @@ public class MenuActivity extends AppCompatActivity {
                     if (protectionList.size() > 0) {
                         lastProtection = protectionList.get(protectionList.size() - 1);
                         protectionCostTV.setText(Float.toString(lastProtection.getCost()) + " zł");
-                        protectionDateTV.setText(lastProtection.getData());
+
+                        try {
+                            protectionDateTV.setText(addDate(lastProtection.getData()));
+                        } catch (ParseException e) {
+                            displayExceptionMessage(e.getMessage());
+                        }
+
+                        //protectionDateTV.setText(lastProtection.getData());
                     }
                 }
             }
@@ -257,6 +272,17 @@ public class MenuActivity extends AppCompatActivity {
         });
 
 }
+
+    public String addDate (String dateStr) throws ParseException {
+        Date date = dateFormat.parse(dateStr);
+        date.setYear(date.getYear() + 1);
+        return dateFormat.format(date);
+    }
+
+    public void displayExceptionMessage(String msg)
+    {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+    }
 
     public void click(View view) {
         LinearLayout extraContainer = null;

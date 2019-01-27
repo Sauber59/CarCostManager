@@ -396,7 +396,8 @@
                         <TextView
                             android:id="@+id/reviewDateTV"
                             style="@style/CostTypeValueEditText"
-                            android:text="-"/>
+                            android:text="-"
+                            android:textSize="16sp"/>
 
 
                     </LinearLayout>
