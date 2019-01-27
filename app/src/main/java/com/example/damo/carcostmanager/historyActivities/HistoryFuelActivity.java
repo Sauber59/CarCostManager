@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.example.damo.carcostmanager.Adapters.CostList;
 import com.example.damo.carcostmanager.R;
 import com.example.damo.carcostmanager.classes.Cost;
+import com.example.damo.carcostmanager.interfaces.interface_delete;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -28,7 +29,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class HistoryFuelActivity extends AppCompatActivity {
+public class HistoryFuelActivity extends AppCompatActivity implements interface_delete {
 
     ListView listViewCosts;
 
@@ -95,8 +96,8 @@ public class HistoryFuelActivity extends AppCompatActivity {
                 }
         });
     }
-
-    private void showUpdateDialog(final String costId){
+    @Override
+    public void showUpdateDialog(final String costId){
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
 
         LayoutInflater inflater = getLayoutInflater();
@@ -124,7 +125,8 @@ public class HistoryFuelActivity extends AppCompatActivity {
 
     }
 
-    private void deleteCost(String costId){
+    @Override
+    public void deleteCost(String costId){
         DatabaseReference databaseReference = databaseCosts.child(costId);
         databaseReference.removeValue();
 
