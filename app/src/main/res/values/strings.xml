@@ -15,4 +15,8 @@
     <string name="title_activity_history_protection">HistoryProtectionActivity</string>
     <string name="title_activity_stats">StatsActivity</string>
     <string name="title_activity_car_info">CarInfoActivity</string>
+
+    <string name="checkbox">com.example.damo.carcostmanager.checkbox</string>
+    <string name="name">com.example.damo.carcostmanager.name</string>
+    <string name="password">com.example.damo.carcostmanager.password</string>
 </resources>

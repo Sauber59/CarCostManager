@@ -1,12 +1,16 @@
 package com.example.damo.carcostmanager;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.appcompat.widget.ViewUtils;
+
+import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -35,6 +39,9 @@ public class LoginActivity extends AppCompatActivity {
     private String rememberedPassword = "";
     boolean rememberFlag = false;
 
+    private SharedPreferences mPreferences;
+    private SharedPreferences.Editor mEditor;
+
 
 
     @Override
@@ -56,13 +63,11 @@ public class LoginActivity extends AppCompatActivity {
         loginBtn = (Button) findViewById(R.id.loginBtn);
         registerBtn = (Button) findViewById(R.id.registerBtn);
 
-        // TODO: 16.01.2019 Dokończyć zapamiętywanie loginu i hasla 
-        if (rememberFlag == true){
-            loginET.setText(rememberedEmail);
-            passwordET.setText(rememberedPassword);
+        mPreferences = getSharedPreferences("com.example.damo.carcostmanager", Context.MODE_PRIVATE);
+        mEditor = mPreferences.edit();
 
-            rememberCB.setChecked(true);
-        }
+        checkSharedPreferences();
+
     }
 
     private void registerUser(){
@@ -146,14 +151,47 @@ public class LoginActivity extends AppCompatActivity {
 // TODO: 16.01.2019 Dokonczyn zapamietywanie loginu i hasla 
             case R.id.rememberCB:
                 if (rememberCB.isChecked()){
-                    rememberedEmail = loginET.getText().toString().trim();
-                    rememberedPassword = passwordET.getText().toString().trim();
-                    rememberFlag = true;
+                    mEditor.putString(getString(R.string.checkbox), "True");
+                    mEditor.commit();
+
+                    //zapisz name
+                    String name = loginET.getText().toString();
+                    mEditor.putString(getString(R.string.name), name);
+                    mEditor.commit();
+
+                    //zapisz password
+                    String password = passwordET.getText().toString();
+                    mEditor.putString(getString(R.string.password), password);
+                    mEditor.commit();
+
                 }else{
-                    rememberedEmail = "";
-                    rememberedPassword = "";
-                    rememberFlag = false;
+                    mEditor.putString(getString(R.string.checkbox), "False");
+                    mEditor.commit();
+
+                    //zapisz name
+                    mEditor.putString(getString(R.string.name), "");
+                    mEditor.commit();
+
+                    //zapisz password
+                    mEditor.putString(getString(R.string.password), "");
+                    mEditor.commit();
                 }
+        }
+
+    }
+
+    private void checkSharedPreferences(){
+        String checkbox = mPreferences.getString(getString(R.string.checkbox), "False");
+        String name = mPreferences.getString(getString(R.string.name), "");
+        String password = mPreferences.getString(getString(R.string.password), "");
+
+        loginET.setText(name);
+        passwordET.setText(password);
+
+        if (checkbox.equals("True")){
+            rememberCB.setChecked(true);
+        }else {
+            rememberCB.setChecked(false);
         }
 
     }
