@@ -35,10 +35,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuth;
 
-    private String rememberedEmail = "";
-    private String rememberedPassword = "";
-    boolean rememberFlag = false;
-
     private SharedPreferences mPreferences;
     private SharedPreferences.Editor mEditor;
 
@@ -53,8 +49,9 @@ public class LoginActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        //uzyskanie połączenia z bazą dla zalogowanego uzytkownika
         firebaseAuth = FirebaseAuth.getInstance();
-
+        //inicjacja okna postepu
         progressDialog = new ProgressDialog(this);
 
         loginET = (EditText)findViewById(R.id.loginET);
@@ -63,36 +60,44 @@ public class LoginActivity extends AppCompatActivity {
         loginBtn = (Button) findViewById(R.id.loginBtn);
         registerBtn = (Button) findViewById(R.id.registerBtn);
 
+        /*impementacja zmiennych wykorzystujących klase getSharedPreferences, która pozwala na zapisywanie
+        w pamięci urzadzenia par watość - klucz i późniejszy ich odczyt po ponownym uruchomienu aplikacji
+         */
         mPreferences = getSharedPreferences("com.example.damo.carcostmanager", Context.MODE_PRIVATE);
         mEditor = mPreferences.edit();
 
+
+        //wywołanie metody zapisujące uzytkownika
         checkSharedPreferences();
 
     }
 
+    //rejestracja użytkownika, zaimplementowane rozwiązanie FirebaseAuthorization
     private void registerUser(){
         String email = loginET.getText().toString().trim();
         String password = loginET.getText().toString().trim();
 
+        //weryfikacja poprawności danych
         if (TextUtils.isEmpty(email)){
             Toast.makeText(this, "Uzupełnij email", Toast.LENGTH_SHORT).show();
             return;
         }
-
+        //weryfikacja poprawności danych
         if (TextUtils.isEmpty(password)){
             Toast.makeText(this, "Uzupełnij haslo", Toast.LENGTH_SHORT).show();
             return;
         }
 
+        //uruchomienie okna postępu
         progressDialog.setMessage("Rejestrowanie w trakcie.. ");
         progressDialog.show();
 
+        //wywowalnie metody wraz z listenerem firebase rejestrującej użytkownika
         firebaseAuth.createUserWithEmailAndPassword(email,password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
-
                             progressDialog.hide();
                             Toast.makeText(LoginActivity.this, "Rejestracja się powiodła",Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(LoginActivity.this, MenuActivity.class));
@@ -104,23 +109,27 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
+    //logowanie użytkownika, zaimplementowane rozwiązanie FirebaseAuthorization
     private void userLogin() {
         String email = loginET.getText().toString().trim();
         String password = loginET.getText().toString().trim();
 
+        //weryfikacja poprawności danych
         if (TextUtils.isEmpty(email)){
             Toast.makeText(this, "Uzupełnij email", Toast.LENGTH_SHORT).show();
             return;
         }
-
+        //weryfikacja poprawności danych
         if (TextUtils.isEmpty(password)){
             Toast.makeText(this, "Uzupełnij haslo", Toast.LENGTH_SHORT).show();
             return;
         }
 
+        //uruchomienie okna postępu
         progressDialog.setMessage("Logowanie w trakcie.. ");
         progressDialog.show();
 
+        //wywowalnie metody wraz z listenerem firebase logującej użytkownika
         firebaseAuth.signInWithEmailAndPassword(email,password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -138,6 +147,7 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
+    //obluga kliknięcia przyciskow
     public void click(View view) {
         switch (view.getId()){
 
@@ -148,18 +158,18 @@ public class LoginActivity extends AppCompatActivity {
             case R.id.registerBtn:
                 registerUser();
                 break;
-// TODO: 16.01.2019 Dokonczyn zapamietywanie loginu i hasla 
+
             case R.id.rememberCB:
                 if (rememberCB.isChecked()){
                     mEditor.putString(getString(R.string.checkbox), "True");
                     mEditor.commit();
 
-                    //zapisz name
+                    //zapisywanie name
                     String name = loginET.getText().toString();
                     mEditor.putString(getString(R.string.name), name);
                     mEditor.commit();
 
-                    //zapisz password
+                    //zapisywanie password
                     String password = passwordET.getText().toString();
                     mEditor.putString(getString(R.string.password), password);
                     mEditor.commit();
@@ -168,11 +178,11 @@ public class LoginActivity extends AppCompatActivity {
                     mEditor.putString(getString(R.string.checkbox), "False");
                     mEditor.commit();
 
-                    //zapisz name
+                    //zapisywanie name
                     mEditor.putString(getString(R.string.name), "");
                     mEditor.commit();
 
-                    //zapisz password
+                    //zapisywanie password
                     mEditor.putString(getString(R.string.password), "");
                     mEditor.commit();
                 }
@@ -180,6 +190,7 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    //obługa zapamiętywania danych uzytkownika po włączeniu opcji "Zapamiętaj"
     private void checkSharedPreferences(){
         String checkbox = mPreferences.getString(getString(R.string.checkbox), "False");
         String name = mPreferences.getString(getString(R.string.name), "");
@@ -188,6 +199,7 @@ public class LoginActivity extends AppCompatActivity {
         loginET.setText(name);
         passwordET.setText(password);
 
+        //weryfikacja zaznaczenia "Zapamiętaj"
         if (checkbox.equals("True")){
             rememberCB.setChecked(true);
         }else {

@@ -63,11 +63,14 @@ public class StatsActivity extends AppCompatActivity {
     float reviewCost;
     float protectionCost;
 
-    float startDistance;
-    float endDistance;
 
-    int numberOfDatabaseRequest = 4;
+    int numberOfDatabaseRequest = 4; //zmienna określająca liczbę sekcji, która musi zostać pobrana zanim będą ustawiane wartości pól w oknie
     AtomicInteger currentNumberOfDatabaseRequest;//zmienna weryfikująca kiedy ostatni listener pobieania danych z bazy się zakończy
+        /*związane jest to z tym, iż pobieranie danych działa asynchronicznie i nie wiadomo które pobieranie zakończy się jako ostatnie
+        przez co nie jesteśmy w stanie przewidzieć miejsca w którym można ustawiać wartości pól.
+        Stad stworzono licznik currentNumberOfDatabaseRequest, który zwiększa się wraz z zakończeniem pobrania danych dla każdej sekcji.
+        Założono, że sekcje są 4 i kiedy licznik osiągnie taką liczbę to następuje uzupełnianie pól w oknie aplikacji.
+         */
 
 
     @Override
@@ -111,8 +114,11 @@ public class StatsActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
+        /* inicjowanie zmiennej mówiącej o liczbie aktualnie pobranych wartości z bazy danych,
+        zastosowano rozbudowany typ Integer z zabezpieczeniem wielowątkowości - > AtomicInteger */
         currentNumberOfDatabaseRequest = new AtomicInteger(0);
 
+        //pobieranie danych dot. kosztuPaliw
         databaseCosts.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -140,7 +146,8 @@ public class StatsActivity extends AppCompatActivity {
             }
         });
 
-        databaseServices.addValueEventListener(new ValueEventListener() {
+        //pobieranie danych dot. serwisów
+        databaseServices.addValueEventListener(new ValueEventListener()  {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
@@ -166,6 +173,7 @@ public class StatsActivity extends AppCompatActivity {
             }
         });
 
+        //pobieranie danych dot. przeglądów
         databaseReviews.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -192,6 +200,7 @@ public class StatsActivity extends AppCompatActivity {
             }
         });
 
+        //pobieranie danych dot. ubezpieczeń
         databaseProtections.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -220,13 +229,17 @@ public class StatsActivity extends AppCompatActivity {
 
 
 
+    /*ustawianie wartości pól w oknie aplikacji,
+     wywoływana jest w momencie osiągnięcia odpowiedniej wartości przez licznik pobierania danych z bazy.
+     Zzwiązane jest to z asynchronicznością pobierania danych z bazy danych i niemożliwości ustalenia w którym
+     momencie pracy wszystkie dane zostaną pobrane*/
      public void onDatabaseResult() {
 
         if (currentNumberOfDatabaseRequest.incrementAndGet() == numberOfDatabaseRequest) {
 
             distanse = calculateDistance(costList);
-            averageFuelConsumption = calculateAverageFuelConsumption(costList);
-            kilometerCost = calculateKilometerCost(costList, fuelCost);
+            averageFuelConsumption = roundFloatTo2(calculateAverageFuelConsumption(costList, distanse));
+            kilometerCost =roundFloatTo2(calculateKilometerCost(costList, fuelCost));
 
             totalCostTV.setText(Float.toString(calculateAllCostSUM(fuelCost, seriveceCost, reviewCost, protectionCost)) + " zł");
             totalDistanceTV.setText(Float.toString(distanse) + " km");
@@ -236,7 +249,7 @@ public class StatsActivity extends AppCompatActivity {
 
             totalFuelCostTV.setText(Float.toString(fuelCost) + " zł");
             totalFuelQuantityTV.setText(Integer.toString(fuelQuantity) + " tankowań");
-            totalAverageFuelConsumptionTV.setText(Float.toString(fuelQuantity) + " l");
+            totalAverageFuelConsumptionTV.setText(Float.toString(averageFuelConsumption) + " l");
 
             totalServiceCostTV.setText(Float.toString(seriveceCost) + " zł");
             totalCountServiceTV.setText(Integer.toString(serviceQuantity) + " serwisów");
@@ -249,7 +262,7 @@ public class StatsActivity extends AppCompatActivity {
         }
     }
 
-
+    // obliczanie przejechanego dystansu
     public float calculateDistance(List<Cost> costList) {
         float distance = 0;
         if (costList.size() >= 2) {
@@ -259,20 +272,21 @@ public class StatsActivity extends AppCompatActivity {
         return distance;
         }
 
-    public float calculateAverageFuelConsumption(List<Cost> costList) {
+    //obliczanie sredniego zużycia paliwa
+    public float calculateAverageFuelConsumption(List<Cost> costList, float distanse) {
         float fuelSum = 0;
-        float fuelNumber = costList.size();
         float averageFuelConsumption = 0;
         
-        if (costList.size() > 0) {
-            for ( Cost cost : costList){
-                fuelSum = fuelSum + cost.getQuantity();
+        if (costList.size() > 1) {
+            for ( int i = 1; i < costList.size(); i++){
+                fuelSum = fuelSum + costList.get(i).getQuantity();
             }
-            averageFuelConsumption = fuelSum /fuelNumber;
+            averageFuelConsumption = fuelSum / distanse * 100;
         }
         return averageFuelConsumption;
     }
 
+    //obliczanie sredniego kosztu pojedynczego rpzejechanego kilemetra
     public float calculateKilometerCost(List<Cost> costList, float fuelCost) {
         float kilometerCost = 0;
 
@@ -294,5 +308,16 @@ public class StatsActivity extends AppCompatActivity {
     public float calculateAllCostSUM(float a, float b, float c, float d) {
         return a + b + c + d;
     }
+
+    //zaokrąglanie liczby w float do 2 miejsc po przecinku
+    public float roundFloatTo2(float number){
+        number = number * 100;
+        number = Math.round(number);
+
+        return number/100;
     }
+    }
+
+
+
 

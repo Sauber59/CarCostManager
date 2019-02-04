@@ -1,20 +1,19 @@
 <resources>
     <string name="app_name">CarCostManager</string>
-    <string name="action_settings">Settings</string>
-    <string name="title_activity_login">LoginActivity</string>
-    <string name="title_activity_menu">MenuActivity</string>
-    <string name="title_activity_menuu">menuuActivity</string>
-    <string name="title_activity_add_fuel">AddFuelActivity</string>
-    <string name="title_activity_add_fuel_activity">AddFuelActivityActivity</string>
-    <string name="title_activity_add_service">AddServiceActivity</string>
-    <string name="title_activity_add_review">AddReviewActivity</string>
-    <string name="title_activity_add_protection">AddProtectionActivity</string>
-    <string name="title_activity_history_fuel">HistoryFuelActivity</string>
-    <string name="title_activity_history_service">HistoryServiceActivity</string>
-    <string name="title_activity_history_review">HistoryReviewActivity</string>
-    <string name="title_activity_history_protection">HistoryProtectionActivity</string>
-    <string name="title_activity_stats">StatsActivity</string>
-    <string name="title_activity_car_info">CarInfoActivity</string>
+    <string name="action_settings">Ustawienia</string>
+    <string name="title_activity_login">Logowanie</string>
+    <string name="title_activity_menuu">Menu</string>
+    <string name="title_activity_add_fuel">Dodaj paliwo</string>
+    <string name="title_activity_add_fuel_activity">Dodaj paliwo</string>
+    <string name="title_activity_add_service">Dodaj serwis</string>
+    <string name="title_activity_add_review">Dodaj przgląd</string>
+    <string name="title_activity_add_protection">Dodaj ubezpieczenie</string>
+    <string name="title_activity_history_fuel">Historia tankowań</string>
+    <string name="title_activity_history_service">Historia serwisów</string>
+    <string name="title_activity_history_review">Historia przeglądów</string>
+    <string name="title_activity_history_protection">Historia ubezpieczeń</string>
+    <string name="title_activity_stats">Statystyki eksploatacji</string>
+    <string name="title_activity_car_info">Informacje o pojeździe</string>
 
     <string name="checkbox">com.example.damo.carcostmanager.checkbox</string>
     <string name="name">com.example.damo.carcostmanager.name</string>

@@ -46,12 +46,18 @@ public class CarInfoActivity extends AppCompatActivity {
         carModelET= (EditText) findViewById(R.id.carModelET);
         carEngineInfoET= (EditText) findViewById(R.id.carEngineInfoET);
 
+
+        //inicjacja okna postepu
         progressDialog = new ProgressDialog(this);
+        //uzyskanie połączenia z bazą dla zalogowanego uzytkownika
         firebaseAuth = FirebaseAuth.getInstance();
+        //utworzenie odwołania do konkretnej tabeli w bazie danych
         databaseCar = FirebaseDatabase.getInstance().getReference("Car");
     }
 
+    //metoda wysylajaca obiekt do bazy danych
     private void sendCarInformation(){
+        //pobranie wprowadzonych danych przez uzytkownika
         String brand = carBrandET.getText().toString().trim();
         String model = carModelET.getText().toString().trim();
         String engine = carEngineInfoET.getText().toString().trim();
@@ -62,12 +68,16 @@ public class CarInfoActivity extends AppCompatActivity {
             return;
         }
 
+        //uruchomienie okna postępu
         progressDialog.setMessage("Zapisywanie danych.. ");
         progressDialog.show();
 
+        //zainicjowanie obiektu, który bedzie wysyłany do bazy
         Car car= new Car(brand, model, engine);
+        //pobranie identyfikatora zalogowanego uzytkownika
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
+        //zapis danych do bazy w strukturze: idUzytkownika / wartość obiektu car
         databaseCar.child(user.getUid()).setValue(car).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
@@ -84,6 +94,7 @@ public class CarInfoActivity extends AppCompatActivity {
         });
     }
 
+    //obsługa przycików
     public void click(View view) {
         Intent intent = null;
 

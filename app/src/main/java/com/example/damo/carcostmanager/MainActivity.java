@@ -9,6 +9,10 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+/*Aktywność obsługująca pierwsze okno programu - okno powitalne,
+informujące hasłowo do czego służy uruchamiane oprogramowanie
+ */
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -41,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    //oblsuga przycisku Rozpocznij
     public void click(View view) {
         Intent intent = null;
 

@@ -74,6 +74,7 @@ public class MenuActivity extends AppCompatActivity {
 
     Car carInfo;
 
+    //okreslenie foramtu w jakim beda obslugiwane daty
     DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
 
@@ -86,33 +87,33 @@ public class MenuActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        //mapowanie obiektów
         carBrandTV= (TextView) findViewById(R.id.carBrandTV);
         carModelTV= (TextView) findViewById(R.id.carModelTV);
         carEngineInfoTV= (TextView) findViewById(R.id.carEngineInfoTV);
-
         fuelCostTV = (TextView) findViewById(R.id.fuelCostTV);
         fuelDistanceTV= (TextView) findViewById(R.id.fuelDistanceTV);
         fuelConsumptionTV= (TextView) findViewById(R.id.fuelConsumptionTV);
         fuelQuantityTV= (TextView) findViewById(R.id.fuelQuantityTV);
-
-
         serviceCostTV= (TextView) findViewById(R.id.serviceCostTV);
         serviceDateTV= (TextView) findViewById(R.id.serviceDateTV);
-
         reviewCostTV= (TextView) findViewById(R.id.reviewCostTV);
         reviewDateTV= (TextView) findViewById(R.id.reviewDateTV);
-
         protectionCostTV= (TextView) findViewById(R.id.protectionCostTV);
         protectionDateTV= (TextView) findViewById(R.id.protectionDateTV);
 
+        //uzyskanie połączenia z bazą dla zalogowanego uzytkownika
         firebaseAuth = FirebaseAuth.getInstance();
+        //zapisanie informacji o zalogowanm uzytkowniku
         FirebaseUser user = firebaseAuth.getCurrentUser();
+        //utworzenie odwołan do konkretnych tabel w bazie danych
         databaseCosts = FirebaseDatabase.getInstance().getReference("Costs/" + user.getUid().toString());
         databaseCar = FirebaseDatabase.getInstance().getReference("Car/");
         databaseProtections = FirebaseDatabase.getInstance().getReference("Protections/" + user.getUid().toString());
         databaseReviews = FirebaseDatabase.getInstance().getReference("Reviews/" + user.getUid().toString());
         databaseServices = FirebaseDatabase.getInstance().getReference("Services/" + user.getUid().toString());
 
+        //zainicjowanie list przechowujących różne rodzaje kosztów
         costList = new ArrayList<>();
         protectionList = new ArrayList<>();
         reviewsList= new ArrayList<>();
@@ -123,7 +124,7 @@ public class MenuActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        //pobieranie inf o pojezdzie
+        //pobieranie z bazy danych informacji o pojezdzie
         databaseCar.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -143,19 +144,21 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
 
-        //pobieranie odstatniego tankowania
+        //pobieranie z bazy danych odstatniego tankowania, wykorzystanie odpowiedniego listenera
        databaseCosts.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.hasChildren()) {
                     costList.clear();
 
+                    //iteracja po zapisach w bazie danych
                     for (DataSnapshot costSnapshot : dataSnapshot.getChildren()) {
+                        //zapis pobranego obiektu
                         Cost cost = costSnapshot.getValue(Cost.class);
-
                         costList.add(cost);
                     }
 
+                    //ustawienie wartości pól w oknie aplikacji
                     if (costList.size() > 0) {
                         lastFuel = costList.get(costList.size() - 1);
                         fuelCostTV.setText(Float.toString(lastFuel.getCost()) + " zł");
@@ -173,11 +176,11 @@ public class MenuActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                Toast.makeText(getApplicationContext(), "Bład", Toast.LENGTH_SHORT).show();
             }
         });
 
-        //pobieranie odstatniego serwisu
+        //pobieranie z bazy danych  odstatniego serwisu
         databaseServices.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -201,7 +204,7 @@ public class MenuActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                Toast.makeText(getApplicationContext(), "Bład", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -233,7 +236,7 @@ public class MenuActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                Toast.makeText(getApplicationContext(), "Bład", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -259,31 +262,32 @@ public class MenuActivity extends AppCompatActivity {
                         } catch (ParseException e) {
                             displayExceptionMessage(e.getMessage());
                         }
-
-                        //protectionDateTV.setText(lastProtection.getData());
                     }
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                Toast.makeText(getApplicationContext(), "Bład", Toast.LENGTH_SHORT).show();
             }
         });
 
 }
 
+    //metoda dodająca rok ważności do daty (np. przegląu, ubezpieczenia)
     public String addDate (String dateStr) throws ParseException {
         Date date = dateFormat.parse(dateStr);
         date.setYear(date.getYear() + 1);
         return dateFormat.format(date);
     }
 
+    //metoda przechwytujaca i wyswietlajaca tresc bledu
     public void displayExceptionMessage(String msg)
     {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
+    //obsluga klikniec w przyciski rozwijące ukryte menu z Buttonami
     public void click(View view) {
         LinearLayout extraContainer = null;
 
@@ -356,6 +360,7 @@ public class MenuActivity extends AppCompatActivity {
         }
     }
 
+    //obsluga klikniec przycisków dodawania kosztów
     public void clickAdd(View view) {
         Intent intent = null;
 
@@ -395,6 +400,7 @@ public class MenuActivity extends AppCompatActivity {
         }
     }
 
+    //obsluga klikniec przycisków uruchamiajacych okna z listami zarejestrowanych juz kosztów
     public void clickHistory(View view) {
         Intent intent = null;
 
