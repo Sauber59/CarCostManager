@@ -13,6 +13,10 @@ import com.example.damo.carcostmanager.classes.Cost;
 
 import java.util.List;
 
+/*adpater wykorzystywany pzy wyswieltaniu krótkich pobranych danych z bazy danych,
+takich jak na przyklad informacje o serisach, przeglądach i ubezpieczeniach
+ */
+
 public class CostShortAdpater extends ArrayAdapter<Cost> {
 
     private Activity context;

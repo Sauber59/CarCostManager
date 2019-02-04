@@ -45,8 +45,11 @@ public class HistoryFuelActivity extends AppCompatActivity implements interface_
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //uzyskanie połączenia z bazą dla zalogowanego uzytkownika
         firebaseAuth = FirebaseAuth.getInstance();
+        //zapisanie informacji o zalogowanm uzytkowniku
         FirebaseUser user = firebaseAuth.getCurrentUser();
+        //utworzenie odwołan do konkretnych tabel w bazie danych
         String databaseRef = "Costs/" + user.getUid().toString();
         databaseCosts = FirebaseDatabase.getInstance().getReference(databaseRef);
 
@@ -57,11 +60,13 @@ public class HistoryFuelActivity extends AppCompatActivity implements interface_
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        //wywowałanie listenera reagujacego na dlugie klikniecie na obiekt listy
         listViewCosts.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 Cost cost = costLists.get(position);
 
+                //wywoałanie okna update
                 showUpdateDialog(cost.getIdCost());
                 return false;
             }
@@ -72,21 +77,25 @@ public class HistoryFuelActivity extends AppCompatActivity implements interface_
     protected void onStart() {
         super.onStart();
 
+        //pobranie danych z tabeli w celu wyswietlenia zarejestrowanych zapisów
         databaseCosts.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                     costLists.clear();
 
+                    //zapisanie elementow
                     for (DataSnapshot costSnapshot : dataSnapshot.getChildren()){
                         Cost cost = costSnapshot.getValue(Cost.class);
 
                         costLists.add(cost);
                     }
 
-
-                    Collections.reverse(costLists);  //odwrócenie kolejności
+                    //odwrócenie kolejności kolekcji
+                    Collections.reverse(costLists);
+                    //zainicjowanie adaptera wyswietlajacego liste zapisow
                     CostList adapter = new CostList(HistoryFuelActivity.this, costLists);
+                    //wybranie adaptera
                     listViewCosts.setAdapter(adapter);
                 }
 
@@ -97,22 +106,24 @@ public class HistoryFuelActivity extends AppCompatActivity implements interface_
         });
     }
     @Override
+    /*metoda uruchamiajaca okno aktualizacji po przytrzymaniu pozycji na liscie kosztow
+    metoda wynika z interfejsu
+     */
     public void showUpdateDialog(final String costId){
+        //inicjalizacja buildera okna AlertDialog
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
-
         LayoutInflater inflater = getLayoutInflater();
-
+        //inicjacja wywoływanego okna, ustawienie layout z którego ma korzystać
         final View dialogView = inflater.inflate(R.layout.update_dialog, null);
-
         dialogBuilder.setView(dialogView);
-
+        //zmapowanie buttona
         final Button deleteBTN = (Button)dialogView.findViewById(R.id.deleteBTN);
-
         dialogBuilder.setTitle("Akcje");
-
+        //wykreowanie obiektu alertDialog
         final AlertDialog alertDialog = dialogBuilder.create();
         alertDialog.show();
 
+        //usuwanei po kliknieciu przycisku
         deleteBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -126,8 +137,13 @@ public class HistoryFuelActivity extends AppCompatActivity implements interface_
     }
 
     @Override
+    /*metoda usuwająca zaznaczony na liscie koszt
+    metoda wynika z interfejsu
+     */
     public void deleteCost(String costId){
+        //pobranie obiektu
         DatabaseReference databaseReference = databaseCosts.child(costId);
+        //usuniecie obiektu
         databaseReference.removeValue();
 
         Toast.makeText(this, "Usunieto", Toast.LENGTH_SHORT).show();

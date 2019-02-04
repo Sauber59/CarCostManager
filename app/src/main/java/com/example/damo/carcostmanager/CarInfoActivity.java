@@ -62,6 +62,7 @@ public class CarInfoActivity extends AppCompatActivity {
         String model = carModelET.getText().toString().trim();
         String engine = carEngineInfoET.getText().toString().trim();
 
+        //weryfikacja poprawnosci danych
         if (TextUtils.isEmpty(brand) || TextUtils.isEmpty(model)
                 || TextUtils.isEmpty(engine)) {
             Toast.makeText(this, "Uzupełnij wszystkie dane!", Toast.LENGTH_SHORT).show();

@@ -1,6 +1,6 @@
 package com.example.damo.carcostmanager.interfaces;
 
-/*Interfejs implementującymetody niezbędne do usuwania dodanych kosztów z bazy danych*/
+/*Interfejs implementujący metody niezbędne do usuwania dodanych kosztów z bazy danych*/
 
 public interface interface_delete {
 

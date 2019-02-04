@@ -11,6 +11,9 @@ import com.example.damo.carcostmanager.R;
 import com.example.damo.carcostmanager.classes.Cost;
 
 import java.util.List;
+/*adpater wykorzystywany pzy wyswieltaniu długi pobranych danych z bazy danych,
+takich jak na przyklad informacje o tankowaniach
+ */
 
 public class CostList extends ArrayAdapter<Cost> {
 

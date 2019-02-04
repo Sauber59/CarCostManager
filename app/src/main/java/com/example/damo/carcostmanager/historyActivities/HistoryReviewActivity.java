@@ -46,8 +46,11 @@ public class HistoryReviewActivity extends AppCompatActivity implements interfac
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //uzyskanie połączenia z bazą dla zalogowanego uzytkownika
         firebaseAuth = FirebaseAuth.getInstance();
+        //zapisanie informacji o zalogowanm uzytkowniku
         FirebaseUser user = firebaseAuth.getCurrentUser();
+        //utworzenie odwołan do konkretnych tabel w bazie danych
         String databaseRef = "Reviews/" + user.getUid().toString();
         database = FirebaseDatabase.getInstance().getReference(databaseRef);
 
@@ -57,11 +60,13 @@ public class HistoryReviewActivity extends AppCompatActivity implements interfac
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        //wywowałanie listenera reagujacego na dlugie klikniecie na obiekt listy
         listViewServices.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 Cost cost = costShortLists.get(position);
 
+                //wywoałanie okna update
                 showUpdateDialog(cost.getIdCost());
                 return false;
             }
@@ -72,12 +77,14 @@ public class HistoryReviewActivity extends AppCompatActivity implements interfac
     protected void onStart() {
         super.onStart();
 
+        //pobranie danych z tabeli w celu wyswietlenia zarejestrowanych zapisów
         database.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 costShortLists.clear();
 
+                //zapisanie elementow
                 for (DataSnapshot costSnapshot : dataSnapshot.getChildren()){
                     Cost cost = costSnapshot.getValue(Cost.class);
 
@@ -85,8 +92,11 @@ public class HistoryReviewActivity extends AppCompatActivity implements interfac
                 }
 
 
-                Collections.reverse(costShortLists);  //odwrócenie kolejności
+                //odwrócenie kolejności kolekcji
+                Collections.reverse(costShortLists);
+                //zainicjowanie adaptera wyswietlajacego liste zapisow
                 CostShortAdpater adapter = new CostShortAdpater(HistoryReviewActivity.this, costShortLists);
+                //wybranie adaptera
                 listViewServices.setAdapter(adapter);
             }
 
@@ -98,22 +108,24 @@ public class HistoryReviewActivity extends AppCompatActivity implements interfac
     }
 
     @Override
-    public void showUpdateDialog(final String costId) {
+    /*metoda uruchamiajaca okno aktualizacji po przytrzymaniu pozycji na liscie kosztow
+    metoda wynika z interfejsu
+     */
+    public void showUpdateDialog(final String costId){
+        //inicjalizacja buildera okna AlertDialog
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
-
         LayoutInflater inflater = getLayoutInflater();
-
+        //ustawieinia parametrow wywoływanego okna, ustawienie layout z którego ma korzystać
         final View dialogView = inflater.inflate(R.layout.update_dialog, null);
-
         dialogBuilder.setView(dialogView);
-
+        //zmapowanie buttona
         final Button deleteBTN = (Button)dialogView.findViewById(R.id.deleteBTN);
-
         dialogBuilder.setTitle("Akcje");
-
+        //wykreowanie obiektu alertDialog
         final AlertDialog alertDialog = dialogBuilder.create();
         alertDialog.show();
 
+        //usuwanie elementu po kliknieciu przycisku
         deleteBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -127,8 +139,13 @@ public class HistoryReviewActivity extends AppCompatActivity implements interfac
     }
 
     @Override
-    public void deleteCost(String costId) {
+    /*metoda usuwająca zaznaczony na liscie koszt
+    metoda wynika z interfejsu
+     */
+    public void deleteCost(String costId){
+        //pobranie obiektu
         DatabaseReference databaseReference = database.child(costId);
+        //usuniecie obiektu
         databaseReference.removeValue();
 
         Toast.makeText(this, "Usunieto", Toast.LENGTH_SHORT).show();

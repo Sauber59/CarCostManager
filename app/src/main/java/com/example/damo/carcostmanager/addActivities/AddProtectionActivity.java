@@ -46,8 +46,10 @@ public class AddProtectionActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
 
     private DatePickerDialog.OnDateSetListener mDateListener;
+    //pobranie daty aktualnej
     Calendar cal = Calendar.getInstance();
     Date date = cal.getTime();
+    //okreslenie foramtu w jakim beda zapisywane  daty
     DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
     String formattedDate = dateFormat.format(date);
 
@@ -125,16 +127,19 @@ public class AddProtectionActivity extends AppCompatActivity {
                 int month = cal.get(Calendar.MONTH);
                 int day = cal.get(Calendar.DAY_OF_MONTH);
 
+                //inicjacja  wraz z okresleniem parametrow okna obslugujacego wybieranie daty
                 DatePickerDialog dialog = new DatePickerDialog(AddProtectionActivity.this,
                         android.R.style.Theme_Holo_Light_Dialog_MinWidth,mDateListener,year,month,day);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.show();
 
+                //pobranie ustawionej przez uzytkownika daty
                 mDateListener = new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                         month = month +1;
 
+                        //ustawienie wybranej oraz zapisanie w zmiennej celem dodania do bazy
                         cal.set(year, month, dayOfMonth);
                         date = cal.getTime();
                         formattedDate = dateFormat.format(date);
