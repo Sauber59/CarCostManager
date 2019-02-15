@@ -58,6 +58,7 @@ public class StatsActivity extends AppCompatActivity {
     float averageFuelConsumption;
     float distanse;
     float kilometerCost;
+    float allCostSum;
 
     float seriveceCost;
     float reviewCost;
@@ -131,8 +132,9 @@ public class StatsActivity extends AppCompatActivity {
                         costList.add(cost);
 
                         fuelQuantity++;
-                        fuelCost = fuelCost + cost.getCost();
-
+                        if (costList.size()>1) {
+                            fuelCost = fuelCost + cost.getCost();
+                        }
                     }
                 onDatabaseResult();
                 }
@@ -237,11 +239,12 @@ public class StatsActivity extends AppCompatActivity {
 
         if (currentNumberOfDatabaseRequest.incrementAndGet() == numberOfDatabaseRequest) {
 
+            allCostSum = calculateAllCostSUM(fuelCost, seriveceCost, reviewCost, protectionCost);
             distanse = calculateDistance(costList);
             averageFuelConsumption = roundFloatTo2(calculateAverageFuelConsumption(costList, distanse));
-            kilometerCost =roundFloatTo2(calculateKilometerCost(costList, fuelCost));
+            kilometerCost =roundFloatTo2(calculateKilometerCost(costList, allCostSum));
 
-            totalCostTV.setText(Float.toString(calculateAllCostSUM(fuelCost, seriveceCost, reviewCost, protectionCost)) + " zł");
+            totalCostTV.setText(Float.toString(allCostSum) + " zł");
             totalDistanceTV.setText(Float.toString(distanse) + " km");
             kilometerCostTV.setText(Float.toString(kilometerCost) + " zł");
             endDistanceTV.setText(Float.toString(costList.get(costList.size()-1).getDistance()) + " km");
@@ -286,23 +289,10 @@ public class StatsActivity extends AppCompatActivity {
         return averageFuelConsumption;
     }
 
-    //obliczanie sredniego kosztu pojedynczego rpzejechanego kilemetra
+    //obliczanie sredniego kosztu pojedynczego przejechanego kilemetra
     public float calculateKilometerCost(List<Cost> costList, float fuelCost) {
         float kilometerCost = 0;
-
-        if (costList.size() > 1) {
-            float beginDistance = costList.get(0).getDistance();
-            float endDistance = costList.get(costList.size() - 1).getDistance();
-
-            for (int i = 1; i < costList.size(); i++) {
-                if (costList.get(i).getDistance() < beginDistance)
-                    beginDistance = costList.get(i).getDistance();
-
-                if (costList.get(i).getDistance() > endDistance)
-                    endDistance = costList.get(i).getDistance();
-            }
-            kilometerCost = fuelCost / (endDistance - beginDistance);
-        }
+        kilometerCost = fuelCost/ calculateDistance(costList);
         return kilometerCost;
     }
     public float calculateAllCostSUM(float a, float b, float c, float d) {
