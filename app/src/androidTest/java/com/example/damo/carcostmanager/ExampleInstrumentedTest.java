@@ -1,6 +1,9 @@
 package com.example.damo.carcostmanager;
 
 import android.content.Context;
+
+import junit.extensions.ActiveTestSuite;
+
 import androidx.test.InstrumentationRegistry;
 import androidx.test.runner.AndroidJUnit4;
 
@@ -16,6 +19,7 @@ import static org.junit.Assert.*;
  */
 @RunWith(AndroidJUnit4.class)
 public class ExampleInstrumentedTest {
+
     @Test
     public void useAppContext() {
         // Context of the app under test.
