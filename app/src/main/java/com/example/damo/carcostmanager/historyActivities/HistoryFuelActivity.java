@@ -13,7 +13,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.damo.carcostmanager.Adapters.CostList;
+import com.example.damo.carcostmanager.Adapters.CostListAdapter;
 import com.example.damo.carcostmanager.R;
 import com.example.damo.carcostmanager.classes.Cost;
 import com.example.damo.carcostmanager.interfaces.interface_delete;
@@ -94,7 +94,7 @@ public class HistoryFuelActivity extends AppCompatActivity implements interface_
                     //odwrócenie kolejności kolekcji
                     Collections.reverse(costLists);
                     //zainicjowanie adaptera wyswietlajacego liste zapisow
-                    CostList adapter = new CostList(HistoryFuelActivity.this, costLists);
+                    CostListAdapter adapter = new CostListAdapter(HistoryFuelActivity.this, costLists);
                     //wybranie adaptera
                     listViewCosts.setAdapter(adapter);
                 }

@@ -13,7 +13,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.example.damo.carcostmanager.Adapters.CostList;
 import com.example.damo.carcostmanager.Adapters.CostShortAdpater;
 import com.example.damo.carcostmanager.R;
 import com.example.damo.carcostmanager.classes.Cost;

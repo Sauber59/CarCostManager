@@ -15,12 +15,12 @@ import java.util.List;
 takich jak na przyklad informacje o tankowaniach
  */
 
-public class CostList extends ArrayAdapter<Cost> {
+public class CostListAdapter extends ArrayAdapter<Cost> {
 
     private Activity context;
     private List<Cost> costList;
 
-    public CostList(Activity context, List<Cost> costList) {
+    public CostListAdapter(Activity context, List<Cost> costList) {
         super(context, R.layout.list_layout, costList);
         this.context = context;
         this.costList = costList;
