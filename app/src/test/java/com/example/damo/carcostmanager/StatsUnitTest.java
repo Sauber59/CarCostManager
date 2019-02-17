@@ -62,8 +62,8 @@ public class StatsUnitTest {
         costList.clear();
         costList.add(new Cost("1", "01-02-2019", 60 ,12, 200, "tankowanie"));
         costList.add(new Cost("1", "02-02-2019", 50 ,10, 400, "tankowanie"));
-        costList.add(new Cost("1", "02-02-2019", 60 ,12, 600, "tankowanie"));
-        costList.add(new Cost("1", "02-02-2019", 90 ,18, 900, "tankowanie"));
+        costList.add(new Cost("1", "03-02-2019", 60 ,12, 600, "tankowanie"));
+        costList.add(new Cost("1", "04-02-2019", 90 ,18, 900, "tankowanie"));
 
     }
 }

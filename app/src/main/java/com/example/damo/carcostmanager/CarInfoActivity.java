@@ -34,6 +34,8 @@ public class CarInfoActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private DatabaseReference databaseCar;
 
+    private Car car;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,7 +76,7 @@ public class CarInfoActivity extends AppCompatActivity {
         progressDialog.show();
 
         //zainicjowanie obiektu, który bedzie wysyłany do bazy
-        Car car= new Car(brand, model, engine);
+        car = new Car(brand, model, engine);
         //pobranie identyfikatora zalogowanego uzytkownika
         FirebaseUser user = firebaseAuth.getCurrentUser();
 

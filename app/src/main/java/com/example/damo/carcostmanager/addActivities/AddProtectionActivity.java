@@ -53,6 +53,8 @@ public class AddProtectionActivity extends AppCompatActivity {
     DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
     String formattedDate = dateFormat.format(date);
 
+    private Cost protectionInformation;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,7 +94,7 @@ public class AddProtectionActivity extends AppCompatActivity {
         progressDialog.show();
 
         String id = databaseProtections.push().getKey();
-        Cost protectionInformation = new Cost(id, data,cost,comment);
+        protectionInformation = new Cost(id, data,cost,comment);
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
         databaseProtections.child(user.getUid()).child(id).setValue(protectionInformation).addOnCompleteListener(new OnCompleteListener<Void>() {

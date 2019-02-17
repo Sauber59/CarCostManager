@@ -46,6 +46,8 @@ public class AddFuelActivity extends AppCompatActivity {
     private DatabaseReference databaseCosts;
     private FirebaseAuth firebaseAuth;
 
+    private Cost costInformation;
+
     //zainicjowanie obiektu wywolujacego okno ustawiania daty
     private DatePickerDialog.OnDateSetListener mDateListener;
     //pobranie daty aktualnej
@@ -102,7 +104,7 @@ public class AddFuelActivity extends AppCompatActivity {
         //zapisanie id wysylanego elementu
         String id = databaseCosts.push().getKey();
         //stworzenie i uzupelnieniewysylanego obeiktu
-        Cost costInformation = new Cost(id, data,cost,quantity,distance);
+        costInformation = new Cost(id, data,cost,quantity,distance);
         //pobranie identyfikatora zalogowanego uzytkownika
         FirebaseUser user = firebaseAuth.getCurrentUser();
 

@@ -54,6 +54,8 @@ public class AddServiceActivity extends AppCompatActivity {
     DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
     String formattedDate = dateFormat.format(date);
 
+    private Cost servicesInformation;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,7 +101,7 @@ public class AddServiceActivity extends AppCompatActivity {
         //zapisanie id wysylanego elementu
         String id = databaseServices.push().getKey();
         //stworzenie i uzupelnieniewysylanego obeiktu
-        Cost servicesInformation = new Cost(id,data,cost,comment);
+        servicesInformation = new Cost(id,data,cost,comment);
         //pobranie identyfikatora zalogowanego uzytkownika
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
