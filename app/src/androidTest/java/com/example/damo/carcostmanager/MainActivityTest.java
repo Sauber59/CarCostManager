@@ -21,6 +21,9 @@ import static org.junit.Assert.*;
 
 import static org.junit.Assert.*;
 
+/**
+ * Klasa odpowiadająca ze testy jednostkowe
+ */
 public class MainActivityTest {
 
     @Rule

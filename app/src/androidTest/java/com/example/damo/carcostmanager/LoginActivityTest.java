@@ -31,6 +31,9 @@ import static org.hamcrest.Matchers.is;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
+/**
+ * Klasa odpowiadajaca za testy funkcjonalne
+ */
 public class LoginActivityTest {
 
     @Rule
