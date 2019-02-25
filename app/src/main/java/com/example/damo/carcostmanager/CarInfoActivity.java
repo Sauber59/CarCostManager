@@ -20,6 +20,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+/**aktywnosc obslugujaca okno i funkcjonalnosc wyswietlania danych o pojezdzie*/
 public class CarInfoActivity extends AppCompatActivity {
 
 
@@ -37,6 +38,12 @@ public class CarInfoActivity extends AppCompatActivity {
     private Car car;
 
     @Override
+    /**
+     * zmnapowanie obiektow okna,
+     * inicjacja okna postepu,
+     * uzyskanie połączenia z bazą dla zalogowanego uzytkownika,
+     * utworzenie odwołania do konkretnej tabeli w bazie danych
+     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_car_info);
@@ -57,7 +64,15 @@ public class CarInfoActivity extends AppCompatActivity {
         databaseCar = FirebaseDatabase.getInstance().getReference("Car");
     }
 
-    //metoda wysylajaca obiekt do bazy danych
+    /**
+     * metoda wysylajaca obiekt do bazy danych,
+     * pobranie wprowadzonych danych przez uzytkownika,
+     * weryfikacja poprawnosci danych,
+     * uruchomienie okna postępu,
+     * zainicjowanie obiektu, który bedzie wysyłany do bazy,
+     * pobranie identyfikatora zalogowanego uzytkownika,
+     * zapis danych do bazy w strukturze: idUzytkownika / wartość obiektu car
+     */
     private void sendCarInformation(){
         //pobranie wprowadzonych danych przez uzytkownika
         String brand = carBrandET.getText().toString().trim();
@@ -97,7 +112,9 @@ public class CarInfoActivity extends AppCompatActivity {
         });
     }
 
-    //obsługa przycików
+    /**
+     * obsługa przycików
+     */
     public void click(View view) {
         Intent intent = null;
 

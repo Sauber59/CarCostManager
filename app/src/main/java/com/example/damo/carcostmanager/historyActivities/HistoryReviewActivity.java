@@ -29,6 +29,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**aktywnosc obslugujaca okno i funkcjonalnosc wyswietlania listy historii dodanych kosztow przegladow*/
 public class HistoryReviewActivity extends AppCompatActivity implements interface_delete {
 
     ListView listViewServices;
@@ -39,6 +40,13 @@ public class HistoryReviewActivity extends AppCompatActivity implements interfac
     List<Cost> costShortLists;
 
     @Override
+    /**
+     * uzyskanie połączenia z bazą dla zalogowanego uzytkownika,
+     * zapisanie informacji o zalogowanm uzytkowniku,
+     * utworzenie odwołan do konkretnych tabel w bazie danych,
+     * wywowałanie listenera reagujacego na dlugie klikniecie na obiekt listy,
+     * wywoałanie okna update
+     * */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history_review);
@@ -73,6 +81,13 @@ public class HistoryReviewActivity extends AppCompatActivity implements interfac
     }
 
     @Override
+    /**
+     * pobranie danych z tabeli w celu wyswietlenia zarejestrowanych zapisów,
+     * zapisanie elementow,
+     * odwrócenie kolejności kolekcji,
+     * zainicjowanie adaptera wyswietlajacego liste zapisow,
+     * wybranie adaptera
+     */
     protected void onStart() {
         super.onStart();
 
@@ -107,8 +122,13 @@ public class HistoryReviewActivity extends AppCompatActivity implements interfac
     }
 
     @Override
-    /*metoda uruchamiajaca okno aktualizacji po przytrzymaniu pozycji na liscie kosztow
-    metoda wynika z interfejsu
+    /**
+     * metoda uruchamiajaca okno aktualizacji po przytrzymaniu pozycji na liscie kosztow metoda wynika z interfejsu
+     * inicjalizacja buildera okna AlertDialog,
+     * inicjacja wywoływanego okna, ustawienie layout z którego ma korzystać,
+     * zmapowanie buttona,
+     * wykreowanie obiektu alertDialog,
+     * usuwanie obiektu po kliknieciu przycisku
      */
     public void showUpdateDialog(final String costId){
         //inicjalizacja buildera okna AlertDialog
@@ -138,8 +158,10 @@ public class HistoryReviewActivity extends AppCompatActivity implements interfac
     }
 
     @Override
-    /*metoda usuwająca zaznaczony na liscie koszt
-    metoda wynika z interfejsu
+    /**
+     * metoda usuwająca zaznaczony na liscie koszt metoda wynika z interfejsu,
+     * pobranie obiektu,
+     * usuniecie obiektu
      */
     public void deleteCost(String costId){
         //pobranie obiektu

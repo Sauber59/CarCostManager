@@ -1,7 +1,7 @@
 package com.example.damo.carcostmanager.classes;
 
-/*Klasa zawierająca informacje na temat kosztu zerejestrowanego w programie
-Informacje te są przechowywane w chmurze a w aplikacji widoczne są w Menu programu oraz w oknach pokazujących historię w formie listy zarejestrowanych kosztów
+/**Klasa zawierajaca informacje na temat kosztu zerejestrowanego w programie
+Informacje te sa przechowywane w chmurze a w aplikacji widoczne sa w Menu programu oraz w oknach pokazuajcyh historie w formie listy zarejestrowanych kosztow
  */
 
 public class Cost {

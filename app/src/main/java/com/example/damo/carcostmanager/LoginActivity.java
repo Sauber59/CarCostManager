@@ -23,6 +23,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+/**aktywnosc obslugujaca okno i funkcjonalnosc rejestracji oraz logowania uzytkownika
+ * ponadto zawiera mozliwosc zapamietania danych uzytkownika w celu pominiecia wpisywania przy kolejnych uruchomieniach aplikacji*/
 public class LoginActivity extends AppCompatActivity {
 
     private EditText loginET;
@@ -41,6 +43,13 @@ public class LoginActivity extends AppCompatActivity {
 
 
     @Override
+    /**
+     * mapowanie obiektow z oknem,
+     * uzyskanie połączenia z bazą dla zalogowanego uzytkownika,
+     * inicjacja okna postepu,
+     * impementacja zmiennych wykorzystujących klase getSharedPreferences, która pozwala na zapisywanie w pamięci urzadzenia par watość - klucz i późniejszy ich odczyt po ponownym uruchomienu aplikacji
+     * wywołanie metody zapisujące uzytkownika
+     */
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
@@ -72,7 +81,12 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    //rejestracja użytkownika, zaimplementowane rozwiązanie FirebaseAuthorization
+    /**
+     * rejestracja użytkownika, zaimplementowane rozwiązanie FirebaseAuthorization,
+     * weryfikacja poprawności danych wprowadzanych,
+     * uruchomienie okna postępu,
+     * wywowalnie metody wraz z listenerem firebase rejestrującej użytkownika
+     */
     private void registerUser(){
         String email = loginET.getText().toString().trim();
         String password = loginET.getText().toString().trim();
@@ -109,7 +123,12 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
-    //logowanie użytkownika, zaimplementowane rozwiązanie FirebaseAuthorization
+    /**
+     * logowanie użytkownika, zaimplementowane rozwiązanie FirebaseAuthorization
+     * weryfikacja poprawności danych wprowadzanych,
+     * uruchomienie okna postępu,
+     * wywowalnie metody wraz z listenerem firebase logującej użytkownika
+     */
     private void userLogin() {
         String email = loginET.getText().toString().trim();
         String password = loginET.getText().toString().trim();
@@ -147,7 +166,10 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
-    //obluga kliknięcia przyciskow
+    /**
+     * obluga kliknięcia przyciskow
+     */
+
     public void click(View view) {
         switch (view.getId()){
 
@@ -190,7 +212,11 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    //obługa zapamiętywania danych uzytkownika po włączeniu opcji "Zapamiętaj"
+    /**
+     * obługa zapamiętywania danych uzytkownika po włączeniu opcji "Zapamiętaj",
+     * weryfikacja zaznaczenia "Zapamiętaj"
+     */
+
     private void checkSharedPreferences(){
         String checkbox = mPreferences.getString(getString(R.string.checkbox), "False");
         String name = mPreferences.getString(getString(R.string.name), "");

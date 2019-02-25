@@ -29,8 +29,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**aktywnosc obslugujaca okno i funkcjonalnosc wyswietlania listy historii dodanych kosztow paliwa*/
 public class HistoryFuelActivity extends AppCompatActivity implements interface_delete {
-
     ListView listViewCosts;
 
     private DatabaseReference databaseCosts;
@@ -38,6 +38,13 @@ public class HistoryFuelActivity extends AppCompatActivity implements interface_
 
     List<Cost> costLists;
 
+    /**
+     * uzyskanie połączenia z bazą dla zalogowanego uzytkownika,
+     * zapisanie informacji o zalogowanm uzytkowniku,
+     * utworzenie odwołan do konkretnych tabel w bazie danych,
+     * wywowałanie listenera reagujacego na dlugie klikniecie na obiekt listy,
+     * wywoałanie okna update
+     * */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,6 +80,13 @@ public class HistoryFuelActivity extends AppCompatActivity implements interface_
         });
     }
 
+    /**
+     * pobranie danych z tabeli w celu wyswietlenia zarejestrowanych zapisów,
+     * zapisanie elementow,
+     * odwrócenie kolejności kolekcji,
+     * zainicjowanie adaptera wyswietlajacego liste zapisow,
+     * wybranie adaptera
+     */
     @Override
     protected void onStart() {
         super.onStart();
@@ -105,10 +119,16 @@ public class HistoryFuelActivity extends AppCompatActivity implements interface_
                 }
         });
     }
-    @Override
-    /*metoda uruchamiajaca okno aktualizacji po przytrzymaniu pozycji na liscie kosztow
-    metoda wynika z interfejsu
+
+    /**
+     * metoda uruchamiajaca okno aktualizacji po przytrzymaniu pozycji na liscie kosztow metoda wynika z interfejsu
+     * inicjalizacja buildera okna AlertDialog,
+     * inicjacja wywoływanego okna, ustawienie layout z którego ma korzystać,
+     * zmapowanie buttona,
+     * wykreowanie obiektu alertDialog,
+     * usuwanie obiektu po kliknieciu przycisku
      */
+    @Override
     public void showUpdateDialog(final String costId){
         //inicjalizacja buildera okna AlertDialog
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
@@ -137,8 +157,10 @@ public class HistoryFuelActivity extends AppCompatActivity implements interface_
     }
 
     @Override
-    /*metoda usuwająca zaznaczony na liscie koszt
-    metoda wynika z interfejsu
+    /**
+     * metoda usuwająca zaznaczony na liscie koszt metoda wynika z interfejsu,
+     * pobranie obiektu,
+     * usuniecie obiektu
      */
     public void deleteCost(String costId){
         //pobranie obiektu

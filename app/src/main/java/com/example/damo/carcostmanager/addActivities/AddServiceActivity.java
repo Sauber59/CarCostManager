@@ -32,6 +32,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+/**aktywnosc obslugujaca okno i funkcjonalnosc dodawania kosztow serwisow*/
 public class AddServiceActivity extends AppCompatActivity {
 
     EditText dataServiceET;
@@ -56,6 +57,11 @@ public class AddServiceActivity extends AppCompatActivity {
 
     private Cost servicesInformation;
 
+    /**mapowanie elementów z layoutem,
+     * uzyskanie połączenia z bazą dla zalogowanego uzytkownika,
+     * utworzenie odwołan do konkretnych tabel w bazie danych,
+     * ustawienie wartosci pola w odpowiednim formacie daty
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,7 +88,14 @@ public class AddServiceActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-    //metoda dodajaca obiekt kosztu do bazy danych
+    /**metoda dodajaca obiekt kosztu do bazy danych,
+     * pobranie danych uzupełnionych przez uzytkownika,
+     * weryfikacja poprawnosci danych,
+     * zapisanie id wysylanego elementu,
+     * stworzenie i uzupelnieniewysylanego obeiktu,
+     * pobranie identyfikatora zalogowanego uzytkownika,
+     * zapis danych do bazy w strukturze: idUzytkownika / wartość obiektu car
+     * */
     private void sendServiceInformation(){
         //pobranie danych uzupełnionych przez uzytkownika
         String data = dataServiceET.getText().toString().trim();
@@ -122,7 +135,10 @@ public class AddServiceActivity extends AppCompatActivity {
         });
     }
 
-    //obsługa przycików
+    /**obsluga przyciskow,
+     *inicjacja  wraz z okresleniem parametrow okna obslugujacego wybieranie daty,
+     *pobranie ustawionej przez uzytkownika daty,
+     *ustawienie wybranej oraz zapisanie w zmiennej celem dodania do bazy*/
     public void click(View view) {
         switch (view.getId()){
             case (R.id.serviceSaveBtn):

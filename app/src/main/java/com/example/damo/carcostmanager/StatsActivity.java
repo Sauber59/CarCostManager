@@ -21,6 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
+/**aktywnosc obslugujaca okno i funkcjonalnosc obliczania na postawie zarejestrowanych kosztow w bazie wynikow statystycznych
+ * klasa dostarcza informacji na m.in. temat calkowitego przejechanego dystansu, sredniego spalania w tym okresie, calkowitego ksoztu eksploatacji jak i sumy poszczegolnych rodzajow kosztów*/
 public class StatsActivity extends AppCompatActivity {
 
     TextView totalCostTV;
@@ -231,7 +233,7 @@ public class StatsActivity extends AppCompatActivity {
 
 
 
-    /*ustawianie wartości pól w oknie aplikacji,
+    /**ustawianie wartości pól w oknie aplikacji,
      wywoływana jest w momencie osiągnięcia odpowiedniej wartości przez licznik pobierania danych z bazy.
      Zzwiązane jest to z asynchronicznością pobierania danych z bazy danych i niemożliwości ustalenia w którym
      momencie pracy wszystkie dane zostaną pobrane*/

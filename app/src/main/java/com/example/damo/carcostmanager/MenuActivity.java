@@ -35,6 +35,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**aktywnosc obslugujaca okno i funkcjonalnosc jednegoz najwaznejszych okien w aplikacji - menu glowne programu
+ * z tego poziomu mozliwe jest uruchamianie wszelkich pozostalych aktywnosci, dodawanie kosztow, przegladnie historii i edycja
+ * ponadto wyswietla ostatnie dane zarejestrowanych kosztow ja i pozwala przejsc do klasy zwracajacej calosciowe statyski eksploatacji pojazdu*/
 public class MenuActivity extends AppCompatActivity {
 
     TextView carBrandTV;
@@ -80,6 +83,13 @@ public class MenuActivity extends AppCompatActivity {
 
 
     @Override
+    /**
+     * mapowanie obiektów,
+     * uzyskanie połączenia z bazą dla zalogowanego uzytkownika,
+     * zapisanie informacji o zalogowanm uzytkowniku,
+     * utworzenie odwołan do konkretnych tabel w bazie danych,
+     * zainicjowanie list przechowujących różne rodzaje kosztów
+     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
@@ -121,6 +131,12 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     @Override
+    /**
+     * pobieranie z bazy danych informacji o pojezdzie,
+     * pobieranie z bazy danych odstatniego kosztu, wykorzystanie odpowiedniego listenera,
+     * iteracja po zapisach w bazie danych,
+     * ustawienie wartości pól w oknie aplikacji
+     */
     protected void onStart() {
         super.onStart();
 
@@ -274,20 +290,29 @@ public class MenuActivity extends AppCompatActivity {
 
 }
 
-    //metoda dodająca rok ważności do daty (np. przegląu, ubezpieczenia)
+    /**
+     * metoda dodająca rok ważności do daty (np. przegląu, ubezpieczenia)
+     */
+
     public String addDate (String dateStr) throws ParseException {
         Date date = dateFormat.parse(dateStr);
         date.setYear(date.getYear() + 1);
         return dateFormat.format(date);
     }
 
-    //metoda przechwytujaca i wyswietlajaca tresc bledu
+    /**
+     * metoda przechwytujaca i wyswietlajaca tresc bledu
+     */
+
     public void displayExceptionMessage(String msg)
     {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
-    //obsluga klikniec w przyciski rozwijące ukryte menu z Buttonami
+    /**
+     * obsluga klikniec w przyciski rozwijące ukryte menu z Buttonami
+     */
+
     public void click(View view) {
         LinearLayout extraContainer = null;
 
@@ -360,7 +385,10 @@ public class MenuActivity extends AppCompatActivity {
         }
     }
 
-    //obsluga klikniec przycisków dodawania kosztów
+    /**
+     * obsluga klikniec przycisków dodawania kosztów
+     */
+
     public void clickAdd(View view) {
         Intent intent = null;
 
@@ -400,7 +428,10 @@ public class MenuActivity extends AppCompatActivity {
         }
     }
 
-    //obsluga klikniec przycisków uruchamiajacych okna z listami zarejestrowanych juz kosztów
+    /**
+     * obsluga klikniec przycisków uruchamiajacych okna z listami zarejestrowanych juz kosztów
+     */
+
     public void clickHistory(View view) {
         Intent intent = null;
 

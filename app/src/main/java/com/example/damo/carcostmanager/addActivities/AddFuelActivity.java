@@ -30,7 +30,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-
+/**aktywnosc obslugujaca okno i funkcjonalnosc dodawania kosztow paliwa*/
 public class AddFuelActivity extends AppCompatActivity {
 
     private EditText dataFuetET;
@@ -48,15 +48,20 @@ public class AddFuelActivity extends AppCompatActivity {
 
     private Cost costInformation;
 
-    //zainicjowanie obiektu wywolujacego okno ustawiania daty
+    /**zainicjowanie obiektu wywolujacego okno ustawiania daty*/
     private DatePickerDialog.OnDateSetListener mDateListener;
-    //pobranie daty aktualnej
+    /**pobranie daty aktualnej*/
     Calendar cal = Calendar.getInstance();
     Date date = cal.getTime();
-    //okreslenie foramtu w jakim beda zapisywane  daty
+    /**okreslenie foramtu w jakim beda zapisywane  daty*/
     DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
     String formattedDate = dateFormat.format(date);
 
+    /**mapowanie elementów z layoutem,
+     * uzyskanie połączenia z bazą dla zalogowanego uzytkownika,
+     * utworzenie odwołan do konkretnych tabel w bazie danych,
+     * ustawienie wartosci pola w odpowiednim formacie daty
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +69,7 @@ public class AddFuelActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        //mapowanie elementów z layoutem
+        /**mapowanie elementów z layoutem*/
         dataFuetET = (EditText) findViewById(R.id.dataFuelET);
         quantityFuelET = (EditText) findViewById(R.id.quantityFuelET);
         costFuelET = (EditText) findViewById(R.id.costFuelET);
@@ -73,25 +78,32 @@ public class AddFuelActivity extends AppCompatActivity {
         fuelSaveBtn = (Button) findViewById(R.id.fuelSaveBtn);
         progressDialog = new ProgressDialog(this);
 
-        //uzyskanie połączenia z bazą dla zalogowanego uzytkownika
+        /**uzyskanie połączenia z bazą dla zalogowanego uzytkownika*/
         firebaseAuth = FirebaseAuth.getInstance();
-        //utworzenie odwołan do konkretnych tabel w bazie danych
+        /**utworzenie odwołan do konkretnych tabel w bazie danych*/
         databaseCosts = FirebaseDatabase.getInstance().getReference("Costs");
 
-        //ustawienie wartosci pola w odpowiednim formacie daty
+        /**ustawienie wartosci pola w odpowiednim formacie daty*/
         dataFuetET.setText(formattedDate);
     }
 
 
-    //metoda dodajaca obiekt kosztu do bazy danych
+    /**metoda dodajaca obiekt kosztu do bazy danych,
+     * pobranie danych uzupełnionych przez uzytkownika,
+     * weryfikacja poprawnosci danych,
+     * zapisanie id wysylanego elementu,
+     * stworzenie i uzupelnieniewysylanego obeiktu,
+     * pobranie identyfikatora zalogowanego uzytkownika,
+     * zapis danych do bazy w strukturze: idUzytkownika / wartość obiektu car
+     * */
     private void sendCostInformation(){
-        //pobranie danych uzupełnionych przez uzytkownika
+        /**pobranie danych uzupełnionych przez uzytkownika*/
         String data = dataFuetET.getText().toString().trim();
         float cost = Float.parseFloat(costFuelET.getText().toString().trim());
         float quantity = Float.parseFloat(quantityFuelET.getText().toString().trim());
         float distance = Float.parseFloat(distanceFuelET.getText().toString().trim());
 
-        //weryfikacja poprawnosci danych
+        /**weryfikacja poprawnosci danych*/
         if (TextUtils.isEmpty(data) || TextUtils.isEmpty(costFuelET.getText())
                 || TextUtils.isEmpty(quantityFuelET.getText()) || TextUtils.isEmpty(distanceFuelET.getText())){
             Toast.makeText(this, "Uzupełnij wszystkie dane!", Toast.LENGTH_SHORT).show();
@@ -101,14 +113,14 @@ public class AddFuelActivity extends AppCompatActivity {
         progressDialog.setMessage("Zapisywanie danych.. ");
         progressDialog.show();
 
-        //zapisanie id wysylanego elementu
+        /**zapisanie id wysylanego elementu*/
         String id = databaseCosts.push().getKey();
-        //stworzenie i uzupelnieniewysylanego obeiktu
+        /**stworzenie i uzupelnieniewysylanego obeiktu*/
         costInformation = new Cost(id, data,cost,quantity,distance);
-        //pobranie identyfikatora zalogowanego uzytkownika
+        /**pobranie identyfikatora zalogowanego uzytkownika*/
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
-        //zapis danych do bazy w strukturze: idUzytkownika / wartość obiektu car
+        /**zapis danych do bazy w strukturze: idUzytkownika / wartość obiektu car*/
         databaseCosts.child(user.getUid()).child(id).setValue(costInformation).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
@@ -125,7 +137,10 @@ public class AddFuelActivity extends AppCompatActivity {
         });
     }
 
-    //obsługa przycików
+    /**obsluga przyciskow,
+    *inicjacja  wraz z okresleniem parametrow okna obslugujacego wybieranie daty,
+    *pobranie ustawionej przez uzytkownika daty,
+    *ustawienie wybranej oraz zapisanie w zmiennej celem dodania do bazy*/
     public void click(View view) {
         switch (view.getId()){
             case (R.id.fuelSaveBtn):
@@ -142,19 +157,19 @@ public class AddFuelActivity extends AppCompatActivity {
                 int month = cal.get(Calendar.MONTH);
                 int day = cal.get(Calendar.DAY_OF_MONTH);
 
-                //inicjacja  wraz z okresleniem parametrow okna obslugujacego wybieranie daty
+                /**inicjacja  wraz z okresleniem parametrow okna obslugujacego wybieranie daty*/
                 DatePickerDialog dialog = new DatePickerDialog(AddFuelActivity.this,
                         android.R.style.Theme_Holo_Light_Dialog_MinWidth,mDateListener,year,month,day);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.show();
 
-                //pobranie ustawionej przez uzytkownika daty
+                /**pobranie ustawionej przez uzytkownika daty*/
                 mDateListener = new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                         month = month +1;
 
-                        //ustawienie wybranej oraz zapisanie w zmiennej celem dodania do bazy
+                        /**ustawienie wybranej oraz zapisanie w zmiennej celem dodania do bazy*/
                         cal.set(year, month, dayOfMonth);
                         date = cal.getTime();
                         formattedDate = dateFormat.format(date);

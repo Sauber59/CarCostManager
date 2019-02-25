@@ -32,6 +32,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+/**aktywnosc obslugujaca okno i funkcjonalnosc dodawania kosztow ubezpieczenia*/
 public class AddProtectionActivity extends AppCompatActivity {
 
     EditText dataProtectionET;
@@ -46,7 +47,7 @@ public class AddProtectionActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
 
     private DatePickerDialog.OnDateSetListener mDateListener;
-    //pobranie daty aktualnej
+    /**pobranie daty aktualnej*/
     Calendar cal = Calendar.getInstance();
     Date date = cal.getTime();
     //okreslenie foramtu w jakim beda zapisywane  daty
@@ -55,6 +56,11 @@ public class AddProtectionActivity extends AppCompatActivity {
 
     private Cost protectionInformation;
 
+    /**mapowanie elementów z layoutem,
+     * uzyskanie połączenia z bazą dla zalogowanego uzytkownika,
+     * utworzenie odwołan do konkretnych tabel w bazie danych,
+     * ustawienie wartosci pola w odpowiednim formacie daty
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,6 +85,14 @@ public class AddProtectionActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
+    /**metoda dodajaca obiekt kosztu do bazy danych,
+     * pobranie danych uzupełnionych przez uzytkownika,
+     * weryfikacja poprawnosci danych,
+     * zapisanie id wysylanego elementu,
+     * stworzenie i uzupelnieniewysylanego obeiktu,
+     * pobranie identyfikatora zalogowanego uzytkownika,
+     * zapis danych do bazy w strukturze: idUzytkownika / wartość obiektu car
+     * */
     private void sendProtectionInformation(){
         String data = dataProtectionET.getText().toString().trim();
 
@@ -113,6 +127,10 @@ public class AddProtectionActivity extends AppCompatActivity {
         });
     }
 
+    /**obluga przyciskow,
+     *inicjacja  wraz z okresleniem parametrow okna obslugujacego wybieranie daty,
+     *pobranie ustawionej przez uzytkownika daty,
+     *ustawienie wybranej oraz zapisanie w zmiennej celem dodania do bazy*/
     public void click(View view) {
         switch (view.getId()){
             case (R.id.protectionSaveBtn):
