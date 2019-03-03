@@ -9,7 +9,7 @@
 
 	a. Kod wraz z komentarzami stworzony w AndroidStudio - [CarCostManager.zip](https://drive.google.com/open?id=1hPnYJxvhx0GuVhUPBTzb9Q4t_y5sc16A)
 
-	b.  Wygenerowana dokumentacja JavaDoc – katalog [JavaDoc](https://github.com/Sauber59/CarCostManager/blob/master/JavaDoc/index.html)
+	b.  Wygenerowana dokumentacja JavaDoc – katalog [JavaDoc](https://sauber59.github.io/CarCostManager/JavaDoc/index.html)
 
 4.  Skompilowana aplikacja - [app-debug.apk](https://github.com/Sauber59/CarCostManager/blob/master/app-debug.apk)
 
